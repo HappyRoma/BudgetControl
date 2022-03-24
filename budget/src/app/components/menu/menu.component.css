@@ -1,0 +1,32 @@
+.menu {
+  height: 100%;
+  border-right: 2px solid lightgrey;
+  font-family: 'Poppins', sans-serif;
+}
+
+.menu-list-container {
+  max-width: 65%;
+  margin: 0 auto;
+}
+
+.menu-list {
+  padding-top: 214px;
+}
+
+.menu-list svg {
+  margin-right: 35px;
+}
+
+.menu-list div {
+  display: flex;
+  margin-bottom: 32px;
+}
+
+.menu-list div:last-child {
+  margin-bottom: 0;
+}
+
+.menu-list span {
+  align-self: center;
+}
+
