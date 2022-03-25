@@ -22,6 +22,10 @@
   margin-bottom: 32px;
 }
 
+.menu-list div:hover {
+  cursor: pointer;
+}
+
 .menu-list div:last-child {
   margin-bottom: 0;
 }
