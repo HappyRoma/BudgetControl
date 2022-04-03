@@ -1,1 +1,40 @@
-<p>settings works!</p>
+<div class="pageName">
+  <h3>Настройки</h3>
+</div>
+
+<div class="setting">
+  <div class="avatar">
+    тут когда-то будет аватар(хотя я не ебу зачем он вообще нужен)
+  </div>
+  <tui-root>
+    <form [formGroup]="settingForm">
+      <div class="settingForm">
+        <!--<input type="text" formControlName="nameValue">-->
+        <div class="form-floating">
+          <input type="text" class="formControl" id="floating-name" placeholder="Имя" formControlName="nameValue">
+          <label for="floating-name"></label>
+        </div>
+        <div class="form-floating">
+          <input type="email" class="formControl" id="floating-email" placeholder="Почта" formControlName="emailValue">
+          <label for="floating-email"></label>
+        </div>
+
+        <!--<input formControlName="emailValue">-->
+
+        <tui-select formControlName="moneyValue" [valueContent]="moneyValueContent">
+          Основная валюта
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="moneyList">
+          </tui-data-list-wrapper>
+          <ng-template #moneyValueContent let-data>
+            {{data.name}} - {{data.icon}}
+          </ng-template>
+        </tui-select>
+        <button type="button" (click)="onSubmit()">
+          Сохранить
+        </button>
+      </div>
+    </form>
+  </tui-root>
+</div>
