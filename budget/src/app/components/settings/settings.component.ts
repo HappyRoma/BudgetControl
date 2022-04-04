@@ -17,8 +17,6 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  //разобраться с этой залупиной. Как работать с Subject. Как сделать так, чтобы в жругие компоненты все нормально уходило. Как сделать нормальные инпуты
-
   moneyList = this.logService.moneyTypesList;
 
   settingForm = new FormGroup({
