@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {BehaviorSubject, Observable} from "rxjs";
 
 class MoneyType {
   constructor(readonly name: string, readonly icon: string) {}
@@ -13,7 +14,13 @@ class MoneyType {
 })
 export class LogService {
 
-  username: string = "Пользователь228";
+  constructor() {}
+
+
+  username: BehaviorSubject<string> = new BehaviorSubject<string>("Пользователь228");
+  $username: Observable<string> = this.username.asObservable();
+
+  userEmail: string = "";
 
   moneyTypesList = [new MoneyType("Российский рубль", "₽"),
     new MoneyType("Американский доллар", "$"),
@@ -21,5 +28,7 @@ export class LogService {
 
   currentMoneyType:MoneyType = this.moneyTypesList[0];
 
-  constructor() { }
+  setUsername(newName: string) {
+    this.username.next(newName);
+  }
 }

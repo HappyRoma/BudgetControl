@@ -11,17 +11,19 @@ import {LogService} from "../../log.service";
 
 export class SettingsComponent implements OnInit {
 
-  constructor(private logService: LogService) { }
+  constructor(private logService: LogService) {
+  }
 
   ngOnInit(): void {
-
   }
+
+  //разобраться с этой залупиной. Как работать с Subject. Как сделать так, чтобы в жругие компоненты все нормально уходило. Как сделать нормальные инпуты
 
   moneyList = this.logService.moneyTypesList;
 
   settingForm = new FormGroup({
-    nameValue: new FormControl(this.logService.username, Validators.required),
-    emailValue: new FormControl('', [Validators.required, Validators.email]),
+    nameValue: new FormControl(this.logService.username.getValue(), Validators.required),
+    emailValue: new FormControl(this.logService.userEmail, [Validators.required, Validators.email]),
     moneyValue: new FormControl(this.logService.currentMoneyType, Validators.required)
   })
 
@@ -33,7 +35,8 @@ export class SettingsComponent implements OnInit {
 
       return;
     }
-    this.logService.username = this.settingForm.value.nameValue;
+    this.logService.setUsername(this.settingForm.value.nameValue);
+    this.logService.userEmail = this.settingForm.value.emailValue;
     this.logService.currentMoneyType = this.settingForm.value.moneyValue;
   }
 }

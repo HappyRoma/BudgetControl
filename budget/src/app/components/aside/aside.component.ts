@@ -1,14 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {LogService} from "../../log.service";
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-aside',
+  templateUrl: './aside.component.html',
+  styleUrls: ['./aside.component.css']
 })
-
-export class HomeComponent implements OnInit {
+export class AsideComponent implements OnInit {
 
   name: string = "";
 
@@ -17,6 +15,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  }
 
+  }
 }
