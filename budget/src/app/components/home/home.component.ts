@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   name: string = "";
 
   constructor(private logService: LogService) {
-    this.logService.$username.subscribe(name => this.name = name)
+    this.logService.$username.subscribe(name => this.name = name);
   }
 
   ngOnInit(): void {

@@ -6,5 +6,6 @@ body {
 .pageName {
   margin-left: 8%;
   margin-top: 8%;
-  font-size: 31px;
+  font-size: 36px;
+  font-weight: 500;
 }

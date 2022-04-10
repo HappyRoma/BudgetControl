@@ -9,15 +9,17 @@ import { MenuComponent } from './components/menu/menu.component';
 import { HomeComponent } from './components/home/home.component';
 import { SettingsComponent } from './components/settings/settings.component';
 import {
-  TuiDataListWrapperModule,
-  TuiFieldErrorModule,
-  TuiInputModule,
-  TuiIslandModule,
-  TuiSelectModule
+    TuiDataListWrapperModule,
+    TuiFieldErrorModule,
+    TuiIslandModule,
+    TuiSelectModule
 } from "@taiga-ui/kit";
 import {ReactiveFormsModule} from "@angular/forms";
 import {LogService} from "./log.service";
 import { AsideComponent } from './components/aside/aside.component';
+import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
+import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AsideComponent } from './components/aside/aside.component';
     MenuComponent,
     HomeComponent,
     SettingsComponent,
-    AsideComponent
+    AsideComponent,
+    CustomCurrencyPipe,
+    CategoriesComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,14 +38,17 @@ import { AsideComponent } from './components/aside/aside.component';
     BrowserAnimationsModule,
     TuiDialogModule,
     TuiNotificationsModule,
-    TuiInputModule,
     TuiSelectModule,
     TuiDataListWrapperModule,
     ReactiveFormsModule,
     TuiFieldErrorModule,
-    TuiIslandModule
+    TuiIslandModule,
+    TuiRingChartModule,
+    TuiAxesModule,
+    TuiBarChartModule
   ],
   providers: [LogService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}

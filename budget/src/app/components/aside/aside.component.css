@@ -1,3 +1,40 @@
 tui-island {
   height: 95vh;
+  background-color: #F5F8FE;
+}
+
+.asideContent {
+  margin-top: 60px;
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+}
+
+.userAvatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: red;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.userName {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.monthChart {
+  margin-top: 40px;
+}
+
+.historyChart {
+  margin-top: 60px;
+}
+
+.axes {
+  height: 298px;
+  width: 328px;
 }

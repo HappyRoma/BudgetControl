@@ -1,3 +1,26 @@
 <tui-island>
-{{name}}
+  <div class="asideContent">
+    <div class="userInfo">
+      <div class="userAvatar">
+
+      </div>
+      <div class="userName">
+        {{name}}
+        <div [innerHTML] = "-22 | customCurrency: currencyIcon"></div>
+      </div>
+    </div>
+    <div class="monthChart">
+      <tui-ring-chart [value]="value" [content]="content" size="l">
+      </tui-ring-chart>
+      <ng-template #content let-index>
+        <div>{{getValue(index)}}</div>
+        <div>Март 2022</div>
+      </ng-template>
+    </div>
+    <div class="historyChart">
+      <tui-axes class="axes" [axisXLabels]="labelsX" [axisYLabels]="labelsY">
+        <tui-bar-chart [max]="50000" [value]="axeValue"></tui-bar-chart>
+      </tui-axes>
+    </div>
+  </div>
 </tui-island>

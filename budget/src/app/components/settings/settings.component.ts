@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LogService} from "../../log.service";
 
@@ -11,7 +11,10 @@ import {LogService} from "../../log.service";
 
 export class SettingsComponent implements OnInit {
 
+  currencyIcon: string = "";
+
   constructor(private logService: LogService) {
+    this.logService.$currentMoneyType.subscribe(moneyType => this.currencyIcon = moneyType.icon);
   }
 
   ngOnInit(): void {
@@ -20,9 +23,9 @@ export class SettingsComponent implements OnInit {
   moneyList = this.logService.moneyTypesList;
 
   settingForm = new FormGroup({
-    nameValue: new FormControl(this.logService.username.getValue(), Validators.required),
+    nameValue: new FormControl(this.logService.username.getValue(), [Validators.required, Validators.maxLength(20)]),
     emailValue: new FormControl(this.logService.userEmail, [Validators.required, Validators.email]),
-    moneyValue: new FormControl(this.logService.currentMoneyType, Validators.required)
+    moneyValue: new FormControl(this.logService.currentMoneyType.getValue(), Validators.required)
   })
 
   onSubmit() {
@@ -35,6 +38,6 @@ export class SettingsComponent implements OnInit {
     }
     this.logService.setUsername(this.settingForm.value.nameValue);
     this.logService.userEmail = this.settingForm.value.emailValue;
-    this.logService.currentMoneyType = this.settingForm.value.moneyValue;
+    this.logService.setCurrentMoneyType(this.settingForm.value.moneyValue);
   }
 }

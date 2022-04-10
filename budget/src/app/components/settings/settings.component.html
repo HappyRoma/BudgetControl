@@ -1,5 +1,5 @@
 <div class="pageName">
-  <h3>Настройки</h3>
+  Настройки
 </div>
 
 <div class="setting">
@@ -9,7 +9,6 @@
   <tui-root>
     <form [formGroup]="settingForm">
       <div class="settingForm">
-        <!--<input type="text" formControlName="nameValue">-->
         <div class="form-floating">
           <input type="text" class="formControl" id="floating-name" placeholder="Имя" formControlName="nameValue">
           <label for="floating-name"></label>
@@ -18,9 +17,6 @@
           <input type="email" class="formControl" id="floating-email" placeholder="Почта" formControlName="emailValue">
           <label for="floating-email"></label>
         </div>
-
-        <!--<input formControlName="emailValue">-->
-
         <tui-select formControlName="moneyValue" [valueContent]="moneyValueContent">
           Основная валюта
           <tui-data-list-wrapper

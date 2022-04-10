@@ -16,7 +16,6 @@ export class LogService {
 
   constructor() {}
 
-
   username: BehaviorSubject<string> = new BehaviorSubject<string>("Пользователь228");
   $username: Observable<string> = this.username.asObservable();
 
@@ -26,9 +25,14 @@ export class LogService {
     new MoneyType("Американский доллар", "$"),
     new MoneyType("Евро", "€")];
 
-  currentMoneyType:MoneyType = this.moneyTypesList[0];
+  currentMoneyType:BehaviorSubject<MoneyType> = new BehaviorSubject<MoneyType>(this.moneyTypesList[0]);
+  $currentMoneyType: Observable<MoneyType> = this.currentMoneyType.asObservable();
 
-  setUsername(newName: string) {
+  setUsername(newName: string): void {
     this.username.next(newName);
+  }
+
+  setCurrentMoneyType(newCurrentMoneyType: MoneyType): void {
+    this.currentMoneyType.next(newCurrentMoneyType);
   }
 }
