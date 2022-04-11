@@ -13,3 +13,13 @@
   font-family: 'Montserrat', sans-serif;
 }
 
+.notification {
+  width: 15vw;
+  height: auto;
+  border-radius: 50%;
+}
+
+.notification label {
+  font-weight: bold;
+  font-size: 16px;
+}

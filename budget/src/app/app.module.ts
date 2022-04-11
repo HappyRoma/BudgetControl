@@ -20,6 +20,48 @@ import { AsideComponent } from './components/aside/aside.component';
 import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
 import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { NotifierModule, NotifierOptions } from 'angular-notifier';
+
+const notifierDefaultOptions: NotifierOptions = {
+  position: {
+    horizontal: {
+      position: 'right',
+      distance: 12,
+    },
+    vertical: {
+      position: 'top',
+      distance: 12,
+      gap: 10,
+    },
+  },
+  theme: 'material',
+  behaviour: {
+    autoHide: 5000,
+    onClick: 'hide',
+    onMouseover: 'pauseAutoHide',
+    showDismissButton: false,
+    stacking: 5,
+  },
+  animations: {
+    enabled: true,
+    show: {
+      preset: 'slide',
+      speed: 400,
+      easing: 'ease',
+    },
+    hide: {
+      preset: 'slide',
+      speed: 500,
+      easing: 'ease',
+      offset: 50,
+    },
+    shift: {
+      speed: 300,
+      easing: 'ease',
+    },
+    overlap: 150,
+  },
+};
 
 @NgModule({
   declarations: [
@@ -45,7 +87,8 @@ import { CategoriesComponent } from './components/categories/categories.componen
     TuiIslandModule,
     TuiRingChartModule,
     TuiAxesModule,
-    TuiBarChartModule
+    TuiBarChartModule,
+    NotifierModule.withConfig(notifierDefaultOptions)
   ],
   providers: [LogService],
   bootstrap: [AppComponent]
