@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LogService} from "../../log.service";
-import {AppComponent} from "../../app.component";
-import {emailValidator} from "../../validators";
+import {LogService} from "../../../../services/log.service";
+import {emailValidator} from "../../../../validators/validators";
+import {CabinetLayoutComponent} from "../../pages/cabinet-layout/cabinet-layout.component";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   currencyIcon: string = "";
 
-  constructor(private logService: LogService, private notify: AppComponent) {
+  constructor(private logService: LogService, private notify: CabinetLayoutComponent) {
     this.logService.$currentMoneyType.subscribe(moneyType => this.currencyIcon = moneyType.icon);
   }
 
