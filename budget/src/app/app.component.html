@@ -1,4 +1,7 @@
 <tui-root>
   <router-outlet></router-outlet>
 </tui-root>
-
+<notifier-container></notifier-container>
+<ng-template #customNotification let-notificationData="notification">
+  <div class="notification" type="notificationData.type"> <label> {{notificationData.label}} </label> <p> {{ notificationData.message }} </p> </div>
+</ng-template>

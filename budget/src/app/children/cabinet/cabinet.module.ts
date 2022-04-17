@@ -11,7 +11,6 @@ import {CustomCurrencyComponent} from "./components/custom-currency/custom-curre
 import {TuiDataListWrapperModule, TuiFieldErrorModule, TuiIslandModule, TuiSelectModule} from "@taiga-ui/kit";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
-import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {TuiRootModule} from "@taiga-ui/core";
 
 const routes: Routes = [
@@ -35,47 +34,6 @@ const routes: Routes = [
   }
 ]
 
-const notifierDefaultOptions: NotifierOptions = {
-  position: {
-    horizontal: {
-      position: 'right',
-      distance: 12,
-    },
-    vertical: {
-      position: 'top',
-      distance: 12,
-      gap: 10,
-    },
-  },
-  theme: 'material',
-  behaviour: {
-    autoHide: 5000,
-    onClick: 'hide',
-    onMouseover: 'pauseAutoHide',
-    showDismissButton: false,
-    stacking: 5,
-  },
-  animations: {
-    enabled: true,
-    show: {
-      preset: 'slide',
-      speed: 400,
-      easing: 'ease',
-    },
-    hide: {
-      preset: 'slide',
-      speed: 500,
-      easing: 'ease',
-      offset: 50,
-    },
-    shift: {
-      speed: 300,
-      easing: 'ease',
-    },
-    overlap: 150,
-  },
-};
-
 @NgModule({
   declarations: [
     CabinetLayoutComponent,
@@ -98,7 +56,6 @@ const notifierDefaultOptions: NotifierOptions = {
     TuiRingChartModule,
     TuiAxesModule,
     TuiBarChartModule,
-    NotifierModule.withConfig(notifierDefaultOptions),
     TuiRootModule,
   ]
 })

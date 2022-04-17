@@ -1,5 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {NotifierService} from "angular-notifier";
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-cabinet-layout',
@@ -8,19 +7,8 @@ import {NotifierService} from "angular-notifier";
 })
 export class CabinetLayoutComponent implements OnInit {
 
-  @ViewChild('customNotification', { static: true }) customNotificationTmpl: any;
-  constructor(private service: NotifierService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-
-  showNotification(label: string, msg: string, type: string) {
-    this.service.show({
-      label: label,
-      message: msg,
-      type: type,
-      template: this.customNotificationTmpl,
-    });
-  }
-
 }

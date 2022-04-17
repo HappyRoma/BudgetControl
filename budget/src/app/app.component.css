@@ -1,0 +1,11 @@
+.notification {
+  width: 15vw;
+  height: auto;
+  border-radius: 50%;
+  white-space: pre-line;
+}
+
+.notification label {
+  font-weight: bold;
+  font-size: 16px;
+}
