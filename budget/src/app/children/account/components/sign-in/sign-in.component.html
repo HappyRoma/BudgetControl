@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="name">
+    Войти
+  </div>
+  <div class="formBox">
+    <form [formGroup]="signInForm">
+      <input type="text" class="formControl" placeholder="Логин" formControlName="login">
+      <input type="{{passwordType}}" class="formControl" placeholder="Пароль" formControlName="password">
+      <div class="show-hide" (mouseleave)="showPassword(false)" (mouseup)="showPassword(false)" (mousedown)="showPassword(true)" [ngClass]="{inactive: isHiddenPassword}"></div>
+      <button type="button" (click)="onSubmit()"> Войти </button>
+      <button type="button" (click)="onSignOut()"> Выйти </button>
+    </form>
+  </div>
+  <span class="link" routerLink="/registration">
+    Регистрация
+  </span>
+</div>

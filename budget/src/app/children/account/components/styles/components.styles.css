@@ -1,0 +1,42 @@
+.content {
+  margin: 30px;
+  padding-top: 1px;
+  padding-bottom: 20px;
+}
+
+.name {
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+.formBox {
+  margin-top: 50px;
+  position: relative;
+}
+
+input {
+  margin-bottom: 24px;
+}
+
+.link {
+  margin-top: 10px;
+  cursor: pointer;
+  color: dodgerblue;
+}
+
+.show-hide {
+  position: absolute;
+  top: 82px;
+  border: 0px;
+  right: 12px;
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  background: url(../../../../../icons/form-icons/icon-eye-off.svg) no-repeat;
+  background-size: cover;
+}
+
+.inactive {
+  background: url(../../../../../icons/form-icons/icon-eye-on.svg) no-repeat;
+  background-size: cover;
+}

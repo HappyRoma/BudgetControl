@@ -1,0 +1,15 @@
+.page {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../../../../assets/bgLoginImg.png");
+  background-size: cover;
+}
+
+.form-window {
+  width: 350px;
+  height: auto;
+  margin: 200px auto auto;
+  background-color: white;
+  border-radius: 20px;
+}
