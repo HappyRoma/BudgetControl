@@ -1,13 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
+import { MoneyType } from '../../../models/classes/moneyType.class';
 
-class MoneyType {
-  constructor(readonly name: string, readonly icon: string) {}
 
-  toString(): string {
-    return `${this.name} - ${this.icon}`
-  }
-}
 
 @Injectable({
   providedIn: 'root'

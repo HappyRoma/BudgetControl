@@ -12,6 +12,7 @@ import {TuiDataListWrapperModule, TuiFieldErrorModule, TuiIslandModule, TuiSelec
 import {ReactiveFormsModule} from "@angular/forms";
 import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
 import {TuiRootModule} from "@taiga-ui/core";
+import {LogService} from "./services/log.service";
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
     TuiAxesModule,
     TuiBarChartModule,
     TuiRootModule,
-  ]
+  ],
+  providers: [LogService]
 })
 export class CabinetModule { }

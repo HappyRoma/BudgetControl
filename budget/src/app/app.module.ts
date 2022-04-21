@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {LogService} from "./services/log.service";
 import {CabinetModule} from "./children/cabinet/cabinet.module";
 import {environment} from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
@@ -13,6 +12,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import {AccountModule} from "./children/account/account.module";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
+import {AuthGuard} from "./guards/auth.guard";
 
 const notifierDefaultOptions: NotifierOptions = {
   position: {
@@ -72,7 +72,7 @@ const notifierDefaultOptions: NotifierOptions = {
     AngularFireDatabaseModule,
     AngularFirestoreModule,
   ],
-  providers: [LogService],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 

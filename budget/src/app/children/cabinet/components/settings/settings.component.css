@@ -18,27 +18,3 @@ input {
   margin-bottom: 24px;
 }
 
-.formControl {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  color: black;
-  width: 100%;
-  padding: 12px 24px;
-  box-shadow: 0px 14px 40px rgba(184, 184, 184, 0.25);
-  border-radius: 10px;
-}
-
-.formControl.ng-touched.ng-invalid{
-  border-color: red;
-}
-
-input.ng-valid {
-  border: none;
-}
-
-input.ng-untouched {
-  border: none;
-}

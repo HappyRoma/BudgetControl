@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LogService} from "../../../../services/log.service";
-import {emailValidator} from "../../../../validators/validators";
-import {CabinetLayoutComponent} from "../../pages/cabinet-layout/cabinet-layout.component";
+import {LogService} from "../../services/log.service";
+import {CustomValidators} from "../../../../validators/validators";
+import {AppComponent} from "../../../../app.component";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class SettingsComponent implements OnInit {
 
   currencyIcon: string = "";
 
-  constructor(private logService: LogService, private notify: CabinetLayoutComponent) {
+  constructor(private logService: LogService, private notify: AppComponent) {
     this.logService.$currentMoneyType.subscribe(moneyType => this.currencyIcon = moneyType.icon);
   }
 
@@ -27,7 +27,7 @@ export class SettingsComponent implements OnInit {
 
   settingForm = new FormGroup({
     nameValue: new FormControl(this.logService.username.getValue(), [Validators.required, Validators.maxLength(20)]),
-    emailValue: new FormControl(this.logService.userEmail, [Validators.required, emailValidator]),
+    emailValue: new FormControl(this.logService.userEmail, [Validators.required, CustomValidators.emailValidator]),
     moneyValue: new FormControl(this.logService.currentMoneyType.getValue(), Validators.required)
   })
 
