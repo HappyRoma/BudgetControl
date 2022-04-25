@@ -28,9 +28,7 @@ export class LogService {
 
   userEmail: string = '';
 
-  moneyTypesList = [new MoneyType("Российский рубль", "₽"),
-    new MoneyType("Американский доллар", "$"),
-    new MoneyType("Евро", "€")];
+  public moneyTypesList = this.userFBService.moneyTypeList;
 
   currentMoneyType:BehaviorSubject<MoneyType> = new BehaviorSubject<MoneyType>(this.userInfo.currentMoneyType);
   $currentMoneyType: Observable<MoneyType> = this.currentMoneyType.asObservable();

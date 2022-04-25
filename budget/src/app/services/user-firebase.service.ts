@@ -3,8 +3,8 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {Category} from "../models/classes/category.model";
 import {Operation} from "../models/classes/operation.model";
 import {Card} from "../models/classes/card.model";
-import {getAuth, onAuthStateChanged} from "@angular/fire/auth";
-import {BehaviorSubject, map, Observable, tap} from "rxjs";
+import {getAuth, onAuthStateChanged, updateEmail} from "@angular/fire/auth";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {IUser} from "../models/interfaces/user.interface";
 import {MoneyType} from "../models/classes/moneyType.class";
 
@@ -114,19 +114,37 @@ export class UserFirebaseService {
     return this._user.asObservable();
   }
 
+  public get moneyTypeList() {
+    return this.moneyTypesList;
+  }
+
   /** Установить новое значение userName */
   public set userName(name: string) {
-    this.userPath?.update({name: name})
+    if (this._user.getValue().name !== name) {
+      this.userPath?.update({name: name})
+    }
   }
 
   /** Установить новое значение userEmail */
   public set userEmail(email: string) {
-    this.userPath?.update({email: email})
+    if (this._user.getValue().email !== email) {
+      this.userPath?.update({email: email})
+
+      const auth = getAuth();
+      // @ts-ignore
+      updateEmail(auth.currentUser, email).then(() => {
+        console.log("Почта изменена");
+      }).catch((error) => {
+        console.log(error);
+      })
+    }
   }
 
   /** Установить новое значение userCurrencyMoneyType */
   public set userCurrencyMoneyType(newMT: MoneyType) {
-    this.userPath?.update({currencyMoneyType: newMT.toString()})
+    if (this._user.getValue().currentMoneyType !== newMT) {
+      this.userPath?.update({currencyMoneyType: newMT.toString()})
+    }
   }
 
   /** Добавление категории
