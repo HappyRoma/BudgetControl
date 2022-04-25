@@ -4,7 +4,6 @@ import {LogService} from "../../services/log.service";
 import {CustomValidators} from "../../../../validators/validators";
 import {AppComponent} from "../../../../app.component";
 
-
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -13,10 +12,7 @@ import {AppComponent} from "../../../../app.component";
 
 export class SettingsComponent implements OnInit {
 
-  currencyIcon: string = "";
-
   constructor(private logService: LogService, private notify: AppComponent) {
-    this.logService.$currentMoneyType.subscribe(moneyType => this.currencyIcon = moneyType.icon);
   }
 
   ngOnInit(): void {
@@ -57,7 +53,7 @@ export class SettingsComponent implements OnInit {
       return;
     }
     this.logService.setUsername(this.settingForm.value.nameValue);
-    this.logService.userEmail = this.settingForm.value.emailValue;
+    this.logService.setUserEmail(this.settingForm.value.emailValue);
     this.logService.setCurrentMoneyType(this.settingForm.value.moneyValue);
     this.notify.showNotification("Успешно", "Ваши данные сохранены.", "success");
   }

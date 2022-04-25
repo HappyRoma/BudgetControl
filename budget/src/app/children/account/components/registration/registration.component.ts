@@ -33,7 +33,7 @@ export class RegistrationComponent implements OnInit {
         }
         else {
           this.notify.showNotification("Успешно", "Вы зарегистрировались", "success");
-          this.router.navigate(['sign-in']);
+          this.router.navigate(['login/sign-in']);
         }
       });
   }

@@ -1,6 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
 import { MoneyType } from '../../../models/classes/moneyType.class';
+import {UserFirebaseService} from "../../../services/user-firebase.service";
+import {IUser} from "../../../models/interfaces/user.interface";
+import {User} from "../../../models/classes/user.model";
 
 
 
@@ -9,25 +12,39 @@ import { MoneyType } from '../../../models/classes/moneyType.class';
 })
 export class LogService {
 
-  constructor() {}
+  public userInfo: IUser = new User();
 
-  username: BehaviorSubject<string> = new BehaviorSubject<string>("Пользователь228");
+  constructor(private userFBService: UserFirebaseService) {
+    this.userFBService.user.subscribe(user => {
+      this.userInfo = user;
+      this.username.next(user.name);
+      this.userEmail = user.email;
+      this.currentMoneyType.next(user.currentMoneyType);
+    });
+  }
+
+  username: BehaviorSubject<string> = new BehaviorSubject<string>('');
   $username: Observable<string> = this.username.asObservable();
 
-  userEmail: string = "";
+  userEmail: string = '';
 
   moneyTypesList = [new MoneyType("Российский рубль", "₽"),
     new MoneyType("Американский доллар", "$"),
     new MoneyType("Евро", "€")];
 
-  currentMoneyType:BehaviorSubject<MoneyType> = new BehaviorSubject<MoneyType>(this.moneyTypesList[0]);
+  currentMoneyType:BehaviorSubject<MoneyType> = new BehaviorSubject<MoneyType>(this.userInfo.currentMoneyType);
   $currentMoneyType: Observable<MoneyType> = this.currentMoneyType.asObservable();
 
   setUsername(newName: string): void {
-    this.username.next(newName);
+    this.userFBService.userName = newName;
+  }
+
+  setUserEmail(newEmail: string): void {
+    this.userEmail = newEmail;
+    this.userFBService.userEmail = newEmail;
   }
 
   setCurrentMoneyType(newCurrentMoneyType: MoneyType): void {
-    this.currentMoneyType.next(newCurrentMoneyType);
+    this.userFBService.userCurrencyMoneyType = newCurrentMoneyType;
   }
 }

@@ -2,15 +2,12 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { TuiRootModule, TuiDialogModule } from "@taiga-ui/core";
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {CabinetModule} from "./children/cabinet/cabinet.module";
 import {environment} from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import {AccountModule} from "./children/account/account.module";
 import {NotifierModule, NotifierOptions} from "angular-notifier";
 import {AuthGuard} from "./guards/auth.guard";
 
@@ -65,8 +62,6 @@ const notifierDefaultOptions: NotifierOptions = {
     TuiRootModule,
     BrowserAnimationsModule,
     TuiDialogModule,
-    CabinetModule,
-    AccountModule,
     NotifierModule.withConfig(notifierDefaultOptions),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LogService} from "../../services/log.service";
+import {UserFirebaseService} from "../../../../services/user-firebase.service";
 
 @Component({
   selector: 'app-aside',
@@ -9,11 +10,9 @@ import {LogService} from "../../services/log.service";
 export class AsideComponent implements OnInit {
 
   name: string = "";
-  currencyIcon: string = "";
 
   constructor(private logService: LogService) {
     this.logService.$username.subscribe(name => this.name = name);
-    this.logService.$currentMoneyType.subscribe(moneyType => this.currencyIcon = moneyType.icon);
   }
 
   ngOnInit(): void {

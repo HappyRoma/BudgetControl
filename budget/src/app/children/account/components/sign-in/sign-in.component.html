@@ -9,9 +9,10 @@
       <div class="show-hide" (mouseleave)="showPassword(false)" (mouseup)="showPassword(false)" (mousedown)="showPassword(true)" [ngClass]="{inactive: isHiddenPassword}"></div>
       <button type="button" (click)="onSubmit()"> Войти </button>
       <button type="button" (click)="onSignOut()"> Выйти </button>
+      <button type="button" routerLink="/cabinet"> Кабинет </button>
     </form>
   </div>
-  <span class="link" routerLink="/registration">
+  <span class="link" routerLink="/login/registration">
     Регистрация
   </span>
 </div>

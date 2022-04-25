@@ -5,6 +5,7 @@ import {Operation} from "./operation.model";
 import {Category} from "./category.model";
 
 export class User implements IUser {
+  uid: string = '';
   name: string = '';
   email: string = '';
   currentMoneyType: MoneyType = new MoneyType("Российский рубль", "₽");
@@ -12,9 +13,7 @@ export class User implements IUser {
   operationList: Operation[] = [];
   cardList: Card[] = [];
 
-  constructor(name: string, email: string) {
-    this.name = name;
-    this.email = email;
+  constructor() {
   }
 
   // addCategory(category: Category): void {
