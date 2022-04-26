@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from "rxjs";
-import { MoneyType } from '../../../models/classes/moneyType.class';
-import {UserFirebaseService} from "../../../services/user-firebase.service";
-import {IUser} from "../../../models/interfaces/user.interface";
-import {User} from "../../../models/classes/user.model";
+import { MoneyType } from '../../../../models/classes/moneyType.class';
+import {UserFirebaseService} from "../../../../services/user-firebase.service";
+import {IUser} from "../../../../models/interfaces/user.interface";
+import {User} from "../../../../models/classes/user.model";
 
 
 

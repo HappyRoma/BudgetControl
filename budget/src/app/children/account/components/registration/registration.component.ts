@@ -88,6 +88,7 @@ export class RegistrationComponent implements OnInit {
 
       return
     }
+    this.registrationForm.markAsPristine();
     this.onSignup(controls['emailValue'].value, controls['password'].value, controls['nameValue'].value);
   }
 

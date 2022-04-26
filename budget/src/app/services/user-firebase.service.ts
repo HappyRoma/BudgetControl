@@ -67,11 +67,15 @@ export class UserFirebaseService {
     this.categoryListPath = this.userPath.collection('categoryList');
     this.operationListPath = this.userPath.collection('operationList');
     this.cardListPath = this.userPath.collection('cardList');
-    this.userPath.valueChanges().subscribe(items => {
+    this.valueUpdating();
+  }
+
+  private valueUpdating() {
+    this.userPath?.valueChanges().subscribe(items => {
       if (items) {
         this._user.pipe(
           map((user) => user.name = items['name'])
-        ).subscribe()
+        ).subscribe();
         this._user.pipe(
           map((user) => user.email = items['email'])
         ).subscribe();
@@ -128,12 +132,11 @@ export class UserFirebaseService {
   /** Установить новое значение userEmail */
   public set userEmail(email: string) {
     if (this._user.getValue().email !== email) {
-      this.userPath?.update({email: email})
-
       const auth = getAuth();
       // @ts-ignore
       updateEmail(auth.currentUser, email).then(() => {
         console.log("Почта изменена");
+        this.userPath?.update({email: email})
       }).catch((error) => {
         console.log(error);
       })
@@ -151,7 +154,7 @@ export class UserFirebaseService {
    *
    * @param category - Объект Category. Категория должна иметь уникальное имя.
    * */
-  addCategory(category: Category) {
+  public addCategory(category: Category) {
 
   }
 }

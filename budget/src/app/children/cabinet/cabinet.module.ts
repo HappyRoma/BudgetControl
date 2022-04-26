@@ -12,7 +12,8 @@ import {TuiDataListWrapperModule, TuiFieldErrorModule, TuiIslandModule, TuiSelec
 import {ReactiveFormsModule} from "@angular/forms";
 import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
 import {TuiRootModule} from "@taiga-ui/core";
-import {LogService} from "./services/log.service";
+import {LogService} from "./services/log/log.service";
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
     AsideComponent,
     CategoriesComponent,
     CustomCurrencyComponent,
+    ModalWindowComponent,
   ],
   imports: [
     CommonModule,

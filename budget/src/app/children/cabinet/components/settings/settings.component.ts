@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {LogService} from "../../services/log.service";
+import {LogService} from "../../services/log/log.service";
 import {CustomValidators} from "../../../../validators/validators";
 import {AppComponent} from "../../../../app.component";
 

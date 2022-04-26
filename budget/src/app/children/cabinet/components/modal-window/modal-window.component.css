@@ -1,0 +1,48 @@
+.modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  z-index: 1000;
+
+  overflow: auto;
+}
+
+.modal-body {
+  padding: 20px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50vw;
+  background-color: #ffffff;
+  border-radius: 15px;
+}
+
+.modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  background-color: #000;
+  opacity: 0.75;
+
+  z-index: 900;
+}
+
+.close-button {
+  position: absolute;
+
+  right: 25vw;
+  left: auto;
+
+  width: 35px;
+  height: 35px;
+  background: url("../../../../../icons/form-icons/close-button.svg") no-repeat;
+  background-size: cover;
+  cursor: pointer;
+
+}

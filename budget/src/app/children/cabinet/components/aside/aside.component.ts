@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {LogService} from "../../services/log.service";
-import {UserFirebaseService} from "../../../../services/user-firebase.service";
+import {LogService} from "../../services/log/log.service";
 
 @Component({
   selector: 'app-aside',
