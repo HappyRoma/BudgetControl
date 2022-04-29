@@ -1,5 +1,6 @@
 import {Component, ViewChild} from '@angular/core';
 import {NotifierService} from "angular-notifier";
+import {NotifierNotificationOptions} from "angular-notifier/lib/models/notifier-notification.model";
 
 @Component({
   selector: 'app-root',
@@ -20,11 +21,16 @@ export class AppComponent {
    */
 
   showNotification(label: string, msg: string, type: string) {
-    this.service.show({
+    const NotifierOption: NNO = {
       label: label,
       message: msg,
       type: type,
       template: this.customNotificationTmpl,
-    });
+    }
+    this.service.show(NotifierOption);
   }
+}
+
+interface NNO extends NotifierNotificationOptions {
+  label? : string;
 }

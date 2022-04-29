@@ -1,4 +1,5 @@
 import {MoneyType} from "../classes/moneyType.class";
+import {Category} from "../classes/category.model";
 
 export interface IUser {
   /** Уникальный идентификатор пользователя */
@@ -9,6 +10,8 @@ export interface IUser {
   email: string;
   /** Валюта пользователя **/
   currentMoneyType: MoneyType;
+  /** Список всех категорий пользователя */
+  categoryList: Category[];
   /** Фото профиля **/
   avatar?: string;
 }

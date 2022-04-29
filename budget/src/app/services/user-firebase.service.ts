@@ -21,7 +21,8 @@ export class UserFirebaseService {
     uid: '',
     name: '',
     email: '',
-    currentMoneyType: this.moneyTypesList[0]
+    currentMoneyType: this.moneyTypesList[0],
+    categoryList: []
   });
 
   private userPath?: AngularFirestoreDocument;
@@ -154,7 +155,7 @@ export class UserFirebaseService {
    *
    * @param category - Объект Category. Категория должна иметь уникальное имя.
    * */
-  public addCategory(category: Category) {
+  public addCategory(category: Category): void {
 
   }
 }

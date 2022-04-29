@@ -1,4 +1,4 @@
-.modal {
+.my-modal {
   position: fixed;
   top: 0;
   right: 0;
@@ -10,12 +10,12 @@
   overflow: auto;
 }
 
-.modal-body {
+.my-modal-body {
   padding: 20px;
   margin-top: 100px;
   margin-left: auto;
   margin-right: auto;
-  width: 50vw;
+  width: 40vw;
   background-color: #ffffff;
   border-radius: 15px;
 }
@@ -36,7 +36,7 @@
 .close-button {
   position: absolute;
 
-  right: 25vw;
+  right: 31vw;
   left: auto;
 
   width: 35px;
