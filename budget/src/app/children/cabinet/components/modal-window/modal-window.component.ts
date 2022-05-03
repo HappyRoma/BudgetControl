@@ -23,7 +23,7 @@ export class ModalWindowComponent implements OnInit {
 
     // @ts-ignore
     this.element.addEventListener('click', x => {
-      if (x.target.className === 'modal') {
+      if (x.target.className === 'my-modal') {
         this.close();
       }
     });

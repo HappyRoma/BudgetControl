@@ -14,6 +14,7 @@ import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/ad
 import {TuiRootModule} from "@taiga-ui/core";
 import {LogService} from "./services/log/log.service";
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
     TuiAxesModule,
     TuiBarChartModule,
     TuiRootModule,
+    DragDropModule
   ],
   providers: [LogService]
 })

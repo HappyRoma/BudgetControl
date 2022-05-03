@@ -93,6 +93,17 @@ export class UserFirebaseService {
         console.log(this._user.getValue());
       }
     });
+    this.categoryListPath?.valueChanges().subscribe(categories => {
+      if (categories) {
+        this._user.pipe(
+          map((user) => {
+            user.categoryList = categories;
+          })
+        ).subscribe();
+        this._user.next(this._user.getValue())
+        console.log(this._user.getValue());
+      }
+    })
   }
 
   /** Создание нового пользователя и его полей в хранилище */
@@ -156,6 +167,12 @@ export class UserFirebaseService {
    * @param category - Объект Category. Категория должна иметь уникальное имя.
    * */
   public addCategory(category: Category): void {
+    this.categoryListPath?.add(category);
+  }
 
+  public removeCategory(category: Category): void {
+    this.categoryListPath?.get().forEach(categories => {
+      this.categoryListPath?.doc(categories.docs.find(doc => doc.data().name === category.name)?.id).delete();
+    })
   }
 }
