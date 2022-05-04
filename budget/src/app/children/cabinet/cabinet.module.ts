@@ -7,7 +7,7 @@ import {CategoriesComponent} from "./components/categories/categories.component"
 import { CabinetLayoutComponent } from './pages/cabinet-layout/cabinet-layout.component';
 import {MenuComponent} from "./components/menu/menu.component";
 import {AsideComponent} from "./components/aside/aside.component";
-import {CustomCurrencyComponent} from "./components/custom-currency/custom-currency.component";
+import {ColoredCurrencyComponent} from "./components/colored-currency/colored-currency.component";
 import {TuiDataListWrapperModule, TuiFieldErrorModule, TuiIslandModule, TuiSelectModule} from "@taiga-ui/kit";
 import {ReactiveFormsModule} from "@angular/forms";
 import {TuiAxesModule, TuiBarChartModule, TuiRingChartModule} from "@taiga-ui/addon-charts";
@@ -15,6 +15,7 @@ import {TuiRootModule} from "@taiga-ui/core";
 import {LogService} from "./services/log/log.service";
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {CustomCurrencyPipe} from "./pipes/custom-currency.pipe";
 
 const routes: Routes = [
   {
@@ -49,8 +50,9 @@ const routes: Routes = [
     SettingsComponent,
     AsideComponent,
     CategoriesComponent,
-    CustomCurrencyComponent,
+    ColoredCurrencyComponent,
     ModalWindowComponent,
+    CustomCurrencyPipe,
   ],
   imports: [
     CommonModule,

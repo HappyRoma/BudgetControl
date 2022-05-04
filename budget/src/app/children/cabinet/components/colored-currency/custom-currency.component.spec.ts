@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CustomCurrencyComponent } from './custom-currency.component';
+import { ColoredCurrencyComponent } from './colored-currency.component';
 
-describe('CustomCurrencyComponent', () => {
-  let component: CustomCurrencyComponent;
-  let fixture: ComponentFixture<CustomCurrencyComponent>;
+describe('ColoredCurrencyComponent', () => {
+  let component: ColoredCurrencyComponent;
+  let fixture: ComponentFixture<ColoredCurrencyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CustomCurrencyComponent ]
+      declarations: [ ColoredCurrencyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CustomCurrencyComponent);
+    fixture = TestBed.createComponent(ColoredCurrencyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

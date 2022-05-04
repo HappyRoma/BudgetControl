@@ -6,14 +6,14 @@
       </div>
       <div class="userName">
         {{name}}
-        <custom-currency [value]="100"></custom-currency>
+        <colored-currency [value]="10000"></colored-currency>
       </div>
     </div>
     <div class="monthChart">
       <tui-ring-chart [value]="value" [content]="content" size="l">
       </tui-ring-chart>
       <ng-template #content let-index>
-        <div>{{getValue(index)}}</div>
+        <div>{{getValue(index) | customCurrency}}</div>
         <div>Март 2022</div>
       </ng-template>
     </div>
