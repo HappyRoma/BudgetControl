@@ -6,6 +6,7 @@ import {IUser} from "../../../../models/interfaces/user.interface";
 import {User} from "../../../../models/classes/user.model";
 import {ICategory} from "../../../../models/interfaces/category.interface";
 import {Category} from "../../../../models/classes/category.model";
+import {ICard} from "../../../../models/interfaces/card.interface";
 
 
 
@@ -23,10 +24,11 @@ export class LogService {
       this.userEmail = user.email;
       this.currentMoneyType.next(user.currentMoneyType);
       this.categoryList.next(user.categoryList);
+      this.cardList.next(user.cardList);
     });
   }
 
-  private catColors = [
+  private colorsArray = [
     '#ef5350',
     '#ea3f7a',
     '#aa46bc',
@@ -48,7 +50,7 @@ export class LogService {
     '#778f9c',
   ];
 
-  private catIcons = [
+  private catIconsArray = [
     'url("assets/icons/category-icons/shoppingBag.svg")',
     'url("assets/icons/category-icons/health.svg")',
     'url("assets/icons/category-icons/gift.svg")',
@@ -59,15 +61,30 @@ export class LogService {
     'url("assets/icons/category-icons/basket.svg")'
   ];
 
+  private cardIconArray = [
+    'url("assets/icons/card-icons/bank.svg")',
+    'url("assets/icons/card-icons/coin.svg")',
+    'url("assets/icons/card-icons/credit-card.svg")',
+    'url("assets/icons/card-icons/piggy-bank.svg")',
+    'url("assets/icons/card-icons/wallet.svg")',
+  ];
+
   private categoryList: BehaviorSubject<ICategory[]> = new BehaviorSubject<ICategory[]>([]);
   public $categoryList: Observable<ICategory[]> = this.categoryList.asObservable();
 
-  public get categoryColors() {
-    return this.catColors;
+  private cardList: BehaviorSubject<ICard[]> = new BehaviorSubject<ICard[]>([]);
+  public $cardList: Observable<ICard[]> = this.cardList.asObservable();
+
+  public get colors() {
+    return this.colorsArray;
   }
 
   public get categoryIcons() {
-    return this.catIcons;
+    return this.catIconsArray;
+  }
+
+  public get cardIcons() {
+    return this.cardIconArray;
   }
 
   username: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -100,13 +117,27 @@ export class LogService {
     else {
       this.userFBService.addCategory({
         name: name,
-        color: this.catColors[colorIndex],
-        icon: this.catIcons[iconIndex]
+        color: this.colorsArray[colorIndex],
+        icon: this.catIconsArray[iconIndex]
       });
     }
   }
 
   public removeCategory(category: Category) {
     this.userFBService.removeCategory(category);
+  }
+
+  public addNewCard(name: string, colorIndex: number, iconIndex: number): void {
+    if(this.cardList.getValue().find(card => card.name === name)) {
+      throw new Error('Карта с таким именем уже существует');
+    }
+    else {
+      this.userFBService.addCard({
+        name: name,
+        color: this.colorsArray[colorIndex],
+        icon: this.cardIconArray[iconIndex],
+        amount: 0
+      })
+    }
   }
 }

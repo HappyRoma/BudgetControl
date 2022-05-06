@@ -1,0 +1,33 @@
+<div class="add-category-form">
+  <h1> {{formName}} </h1>
+  <div class="category-preview">
+    <p> {{previewName}} </p>
+    <div class="preview-container">
+      <div [ngStyle]="{'-webkit-mask-image': icons[iconIndex], '-webkit-mask-size': 'cover', 'background-color': colors[colorIndex]}"></div>
+    </div>
+  </div>
+  <div class="categoryForm">
+    <form [formGroup]="formGroup">
+      <input type="text" class="formControl" placeholder="Название" formControlName="nameValue">
+    </form>
+  </div>
+  <div class="choose-containers">
+    <div class="choose-color">
+      <h2> Цвет </h2>
+      <div class="choose-color-container">
+        <div *ngFor="let color of colors; let i = index" [attr.data-index]="i">
+          <div (click)="chooseColorIndex(i)" [ngStyle]="{'background-color': colors[i]}"></div>
+        </div>
+      </div>
+    </div>
+    <div class="choose-icon">
+      <h2> Иконка </h2>
+      <div class="choose-icon-container">
+        <div *ngFor="let icon of icons; let j = index" [attr.data-index]="j">
+          <div (click)="chooseIconIndex(j)" [ngStyle]="{'-webkit-mask-image': icons[j], '-webkit-mask-size': 'cover', 'background-color': 'black'}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="submit-button" (click)="onSubmit()"> Сохранить </div>
+</div>

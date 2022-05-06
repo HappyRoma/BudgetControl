@@ -1,0 +1,40 @@
+<div class="pageName">
+  Все счета
+</div>
+<div class="card-workspace">
+  <div class="cards">
+    <div class="cards-header">
+      <h2> Счета </h2>
+      <colored-currency [value]="sumCardAmount.asObservable()"></colored-currency>
+    </div>
+    <div class="card-list">
+      <ul>
+        <li *ngFor="let card of cardList; let i = index" [attr.data-index] = "i">
+          <div class="card-placeholder">
+            <div class="card-container">
+              <div [ngStyle]="{'-webkit-mask-image': card.icon, '-webkit-mask-size': 'cover', 'background-color': card.color}"></div>
+            </div>
+            <div class="card-info">
+              <p> {{card.name}} </p>
+              <p> {{card.amount | customCurrency}} </p>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="add-card" (click)="openModal('createCard')">
+            <div class="card-container">
+              <div class="add-card-button">
+                <img src="assets/icons/form-icons/addIcon.svg">
+              </div>
+            </div>
+            <div class="add-card-text"> Добавить счёт</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<modal-window id="createCard">
+  <add-modal type="card" (submitForm)="onSubmit($event)"></add-modal>
+</modal-window>

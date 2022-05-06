@@ -22,7 +22,8 @@ export class UserFirebaseService {
     name: '',
     email: '',
     currentMoneyType: this.moneyTypesList[0],
-    categoryList: []
+    categoryList: [],
+    cardList: []
   });
 
   private userPath?: AngularFirestoreDocument;
@@ -104,12 +105,25 @@ export class UserFirebaseService {
         console.log(this._user.getValue());
       }
     })
+    this.cardListPath?.valueChanges().subscribe(card => {
+      if (card) {
+        this._user.pipe(
+          map((user) => {
+            user.cardList = card;
+          })
+        ).subscribe();
+        this._user.next(this._user.getValue())
+        console.log(this._user.getValue());
+      }
+    })
   }
 
   /** Создание нового пользователя и его полей в хранилище */
   public createNewUser(email: string, name: string) {
 
     this.createPaths();
+    // Тут программа просто валится. Пути создаются раньше, а значит и значения дефолтных полей читаются раньше, чем они успевают создаться.
+    // FB как котик падает в недоумении что происходит. Мне пока лень это переписывать и тестить, оставим на патч первого дня
 
     this.userPath?.set({
       name: name,
@@ -167,12 +181,24 @@ export class UserFirebaseService {
    * @param category - Объект Category. Категория должна иметь уникальное имя.
    * */
   public addCategory(category: Category): void {
-    this.categoryListPath?.add(category);
+    this.categoryListPath?.doc(this._user.getValue().categoryList.length.toString()).set(category);
   }
 
+  /** Удаление категории
+   *
+   * @param category - Объект Category.
+   * */
   public removeCategory(category: Category): void {
     this.categoryListPath?.get().forEach(categories => {
       this.categoryListPath?.doc(categories.docs.find(doc => doc.data().name === category.name)?.id).delete();
     })
+  }
+
+  /** Добавление счета
+   *
+   * @param card - Объект Card. Счет должен иметь уникальное имя.
+   * */
+  public addCard(card: Card): void {
+    this.cardListPath?.doc(this._user.getValue().cardList.length.toString()).set(card);
   }
 }

@@ -16,6 +16,8 @@ import {LogService} from "./services/log/log.service";
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {CustomCurrencyPipe} from "./pipes/custom-currency.pipe";
+import {CardsComponent} from './components/cards/cards.component';
+import { AddModalComponent } from './components/add-modal/add-modal.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,10 @@ const routes: Routes = [
       {
         path: 'categories',
         component: CategoriesComponent
+      },
+      {
+        path: 'cards',
+        component: CardsComponent
       },
       {
         path: '**',
@@ -53,6 +59,8 @@ const routes: Routes = [
     ColoredCurrencyComponent,
     ModalWindowComponent,
     CustomCurrencyPipe,
+    CardsComponent,
+    AddModalComponent,
   ],
   imports: [
     CommonModule,
