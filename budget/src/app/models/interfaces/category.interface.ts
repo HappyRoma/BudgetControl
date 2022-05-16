@@ -5,4 +5,9 @@ export interface ICategory {
   color: string;
   /** Иконка категории **/
   icon: string;
+  /** Тип категории **/
+  type: CategoryType;
 }
+
+
+export type CategoryType = 'income' | 'expend';
