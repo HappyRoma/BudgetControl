@@ -36,3 +36,25 @@
   align-self: center;
 }
 
+.logout-container {
+  display: flex;
+  margin: 40vh auto;
+  width: 90px;
+  height: 24px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.logout-container .logout-icon {
+  margin-right: 7px;
+}
+
+.logout-container .logout-icon img {
+  opacity: 80%;
+}
+
+.logout-container .logout-text {
+  font-size: 16px;
+  font-weight: 500;
+  opacity: 80%;
+}

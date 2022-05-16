@@ -1,0 +1,61 @@
+<div class="add-operation-form">
+  <div class="category-card-choose-container">
+
+    <div class="card-choose" (click)="openModal('chooseCard')" [ngStyle]="{'background-color': currentCard.color}">
+      <div class="current-category">
+        <div class="current-category-container">
+          <div [ngStyle]="{'-webkit-mask-image': currentCard.icon, '-webkit-mask-size': 'cover', 'background-color': currentCard.color}"></div>
+        </div>
+        <p> {{currentCard.name}} </p>
+      </div>
+    </div>
+
+    <div class="category-choose" (click)="openModal('chooseCategory')" [ngStyle]="{'background-color': currentCategory.getValue().color}" >
+      <div class="current-category">
+        <div class="current-category-container">
+          <div [ngStyle]="{'-webkit-mask-image': currentCategory.getValue().icon, '-webkit-mask-size': 'cover', 'background-color': currentCategory.getValue().color}"></div>
+        </div>
+        <p> {{currentCategory.getValue().name}} </p>
+      </div>
+    </div>
+
+  </div>
+  <form class="operationForm" [formGroup]="operationForm">
+    <input type="date" class="formControl" formControlName="dateValue">
+    <input type="number" class="formControl" formControlName="amountValue">
+    <button (click)="onSubmit()"> Я не хочу верстать эту кнопку... </button>
+  </form>
+</div>
+
+<modal-window id="chooseCard">
+  <div class="card-list">
+    <ul>
+      <li *ngFor="let card of cardList; let i = index" [attr.data-index] = "i">
+        <div class="card-placeholder" (click)="setCurrentCard(card)">
+          <div class="card-container">
+            <div [ngStyle]="{'-webkit-mask-image': card.icon, '-webkit-mask-size': 'cover', 'background-color': card.color}"></div>
+          </div>
+          <div class="card-info">
+            <p> {{card.name}} </p>
+            <p> {{card.amount | customCurrency}} </p>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</modal-window>
+
+<modal-window id="chooseCategory">
+  <div class="category-list">
+    <ul>
+      <li *ngFor="let cat of categoryList; let i = index" [attr.data-index] = "i">
+        <div class="category">
+          <p> {{cat.name}} </p>
+          <div class="category-container" (click)="setCurrentCategory(cat)">
+            <div [ngStyle]="{'-webkit-mask-image': cat.icon, '-webkit-mask-size': 'cover', 'background-color': cat.color}"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</modal-window>

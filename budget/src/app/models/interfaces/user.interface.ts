@@ -1,6 +1,7 @@
 import {MoneyType} from "../classes/moneyType.class";
 import {Category} from "../classes/category.model";
 import {Card} from "../classes/card.model";
+import {Operation} from "../classes/operation.model";
 
 export interface IUser {
   /** Уникальный идентификатор пользователя */
@@ -15,6 +16,8 @@ export interface IUser {
   categoryList: Category[];
   /** Список всех карт пользователя */
   cardList: Card[];
+  /** Список всех операций пользователя */
+  operationList: Operation[];
   /** Фото профиля **/
   avatar?: string;
 }

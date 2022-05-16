@@ -7,6 +7,9 @@ import {getAuth, onAuthStateChanged, updateEmail} from "@angular/fire/auth";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {IUser} from "../models/interfaces/user.interface";
 import {MoneyType} from "../models/classes/moneyType.class";
+import {ICategory} from "../models/interfaces/category.interface";
+import {ICard} from "../models/interfaces/card.interface";
+import {IOperation} from "../models/interfaces/operation.interface";
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +26,8 @@ export class UserFirebaseService {
     email: '',
     currentMoneyType: this.moneyTypesList[0],
     categoryList: [],
-    cardList: []
+    cardList: [],
+    operationList: []
   });
 
   private userPath?: AngularFirestoreDocument;
@@ -116,6 +120,18 @@ export class UserFirebaseService {
         console.log(this._user.getValue());
       }
     })
+    this.operationListPath?.valueChanges().subscribe(operation => {
+      if (operation) {
+        this._user.pipe(
+          map((user) => {
+            user.operationList = operation;
+          })
+        ).subscribe()
+        this._user.getValue().operationList.forEach(op => {
+
+        })
+      }
+    })
   }
 
   /** Создание нового пользователя и его полей в хранилище */
@@ -180,15 +196,15 @@ export class UserFirebaseService {
    *
    * @param category - Объект Category. Категория должна иметь уникальное имя.
    * */
-  public addCategory(category: Category): void {
-    this.categoryListPath?.doc(this._user.getValue().categoryList.length.toString()).set(category);
+  public addCategory(category: ICategory): void {
+    this.categoryListPath?.doc().set(category);
   }
 
   /** Удаление категории
    *
    * @param category - Объект Category.
    * */
-  public removeCategory(category: Category): void {
+  public removeCategory(category: ICategory): void {
     this.categoryListPath?.get().forEach(categories => {
       this.categoryListPath?.doc(categories.docs.find(doc => doc.data().name === category.name)?.id).delete();
     })
@@ -198,7 +214,26 @@ export class UserFirebaseService {
    *
    * @param card - Объект Card. Счет должен иметь уникальное имя.
    * */
-  public addCard(card: Card): void {
-    this.cardListPath?.doc(this._user.getValue().cardList.length.toString()).set(card);
+  public addCard(card: ICard): void {
+    this.cardListPath?.doc().set(card);
+  }
+
+  /** Обновление суммы счета
+   *
+   * @param card - Объект Card в котором должно измениться значение
+   * @param amount - Новое значение у объекта Card
+   */
+  public updateCardAmount(card: ICard, amount: number): void {
+    this.cardListPath?.get().forEach(cards => {
+      this.cardListPath?.doc(cards.docs.find(doc => doc.data().name === card.name)?.id).update({amount: amount})
+    })
+  }
+
+  /** Добавление операции
+   *
+   * @param operation - Объект Operation.
+   * */
+  public addOperation(operation: IOperation): void {
+    this.operationListPath?.doc().set(operation);
   }
 }

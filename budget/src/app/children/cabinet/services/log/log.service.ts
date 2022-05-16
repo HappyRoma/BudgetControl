@@ -4,9 +4,9 @@ import { MoneyType } from '../../../../models/classes/moneyType.class';
 import {UserFirebaseService} from "../../../../services/user-firebase.service";
 import {IUser} from "../../../../models/interfaces/user.interface";
 import {User} from "../../../../models/classes/user.model";
-import {ICategory} from "../../../../models/interfaces/category.interface";
-import {Category} from "../../../../models/classes/category.model";
+import {CategoryType, ICategory} from "../../../../models/interfaces/category.interface";
 import {ICard} from "../../../../models/interfaces/card.interface";
+import {Category} from "../../../../models/classes/category.model";
 
 
 
@@ -110,7 +110,7 @@ export class LogService {
     this.userFBService.userCurrencyMoneyType = newCurrentMoneyType;
   }
 
-  public addNewCategory(name: string, colorIndex: number, iconIndex: number): void {
+  public addNewCategory(name: string, colorIndex: number, iconIndex: number, type: CategoryType): void {
     if (this.categoryList.getValue().find(cat => cat.name === name)) {
       throw new Error('Категория с таким именем уже существует');
     }
@@ -118,12 +118,13 @@ export class LogService {
       this.userFBService.addCategory({
         name: name,
         color: this.colorsArray[colorIndex],
-        icon: this.catIconsArray[iconIndex]
+        icon: this.catIconsArray[iconIndex],
+        type: type
       });
     }
   }
 
-  public removeCategory(category: Category) {
+  public removeCategory(category: ICategory) {
     this.userFBService.removeCategory(category);
   }
 
@@ -139,5 +140,15 @@ export class LogService {
         amount: 0
       })
     }
+  }
+
+  public addOperation(category: ICategory, card: ICard, date: string, value: number) {
+    this.userFBService.addOperation({
+      card: card.name,
+      date: date,
+      value: value,
+      categoryName: category.name
+    })
+    this.userFBService.updateCardAmount(card, card.amount - value);
   }
 }

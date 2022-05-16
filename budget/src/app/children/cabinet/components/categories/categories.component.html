@@ -2,13 +2,46 @@
   Категории
 </div>
 
-<div class="category-workspace">
+<div class="category-workspace" *ngIf="categoriesType === 'income'">
   <div class="category-list">
-    <ul cdkDropList (cdkDropListDropped)="isCategoryMoving(false)">
-      <li *ngFor="let cat of categoryList; let i = index" [attr.data-index] = "i" cdkDrag>
-        <div class="category">
+    <ul
+      cdkDropList
+      (cdkDropListDropped)="isCategoryMoving(false)"
+      [cdkDropListData]="categoryListIncome"
+    >
+      <li *ngFor="let cat of categoryListIncome; let i = index" [attr.data-index] = "i" cdkDrag>
+        <div class="category" (mousedown)="isCategoryMoving(true)" (mouseup)="isCategoryMoving(false)">
           <p> {{cat.name}} </p>
-          <div class="category-container" (mousedown)="isCategoryMoving(true)" (mouseup)="isCategoryMoving(false)">
+          <div class="category-container" (click)="openModal('createOperation'); setCurrentCategory(cat)">
+            <div [ngStyle]="{'-webkit-mask-image': cat.icon, '-webkit-mask-size': 'cover', 'background-color': cat.color}"></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="category add-category">
+          <div class="add-category-button" (click)="openModal('createCategory')">
+            <div>
+              <img src="assets/icons/form-icons/addIcon.svg">
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div class="category-chart">
+  </div>
+</div>
+<div class="category-workspace" *ngIf="categoriesType === 'expend'">
+  <div class="category-list">
+    <ul
+      cdkDropList
+      (cdkDropListDropped)="isCategoryMoving(false)"
+      [cdkDropListData]="categoryListExpend"
+    >
+      <li *ngFor="let cat of categoryListExpend; let i = index" [attr.data-index] = "i" cdkDrag>
+        <div class="category" (mousedown)="isCategoryMoving(true)" (mouseup)="isCategoryMoving(false)">
+          <p> {{cat.name}} </p>
+          <div class="category-container" (click)="openModal('createOperation'); setCurrentCategory(cat)">
             <div [ngStyle]="{'-webkit-mask-image': cat.icon, '-webkit-mask-size': 'cover', 'background-color': cat.color}"></div>
           </div>
         </div>
@@ -28,9 +61,21 @@
   </div>
 </div>
 
-<div class="delete-bin" (click)="showBinInfo()" [ngClass]="{'delete-bin-bigger': iscategoryMoving}" cdkDropList (cdkDropListDropped)="deleteCategory($event)">
+<button (click)="switchCatType()"> Сменить категории </button>
+{{categoriesType}}
+
+<div class="delete-bin"
+     (click)="showBinInfo()"
+     [ngClass]="{'delete-bin-bigger': iscategoryMoving}"
+     cdkDropList
+     (cdkDropListDropped)="deleteCategory($event)"
+>
 </div>
 
 <modal-window id="createCategory">
   <add-modal type="category" (submitForm)="onSubmit($event)"></add-modal>
+</modal-window>
+
+<modal-window id="createOperation">
+  <add-operation></add-operation>
 </modal-window>
