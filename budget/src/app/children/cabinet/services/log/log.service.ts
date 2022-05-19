@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, find, map, Observable} from "rxjs";
 import { MoneyType } from '../../../../models/classes/moneyType.class';
 import {UserFirebaseService} from "../../../../services/user-firebase.service";
 import {IUser} from "../../../../models/interfaces/user.interface";
@@ -7,6 +7,7 @@ import {User} from "../../../../models/classes/user.model";
 import {CategoryType, ICategory} from "../../../../models/interfaces/category.interface";
 import {ICard} from "../../../../models/interfaces/card.interface";
 import {Category} from "../../../../models/classes/category.model";
+import {Operation} from "../../../../models/classes/operation.model";
 
 
 
@@ -23,9 +24,41 @@ export class LogService {
       this.username.next(user.name);
       this.userEmail = user.email;
       this.currentMoneyType.next(user.currentMoneyType);
+      this.operationList.next(user.operationList);
       this.categoryList.next(user.categoryList);
+      this.setOperationsToCategoryList();
       this.cardList.next(user.cardList);
     });
+  }
+
+  public differentCategory: BehaviorSubject<Category> = new BehaviorSubject<Category>({
+    name: 'Другое',
+    color: 'grey',
+    icon: '',
+    type: 'expend',
+    operationList: []
+  });
+  public differentCategory$: Observable<Category> = this.differentCategory.asObservable();
+
+  private setOperationsToCategoryList(): void {
+    this.categoryList.subscribe(category => {
+        category.forEach(cat => cat.operationList = []);
+      });
+    this.differentCategory.subscribe(category => category.operationList = []);
+    this.operationList.getValue().forEach(operation => {
+      if (operation.categoryName === 'Другое') {
+        this.differentCategory.pipe(
+          map((cat) => {
+            cat.operationList?.push(operation);
+          })
+        ).subscribe()
+      }
+      else {
+        this.categoryList.subscribe(category => {
+          category.find(cat => cat.name === operation.categoryName)?.operationList?.push(operation);
+        })
+      }
+    })
   }
 
   private colorsArray = [
@@ -69,11 +102,14 @@ export class LogService {
     'url("assets/icons/card-icons/wallet.svg")',
   ];
 
-  private categoryList: BehaviorSubject<ICategory[]> = new BehaviorSubject<ICategory[]>([]);
-  public $categoryList: Observable<ICategory[]> = this.categoryList.asObservable();
+  public categoryList: BehaviorSubject<Category[]> = new BehaviorSubject<Category[]>([]);
+  public $categoryList: Observable<Category[]> = this.categoryList.asObservable();
 
   private cardList: BehaviorSubject<ICard[]> = new BehaviorSubject<ICard[]>([]);
   public $cardList: Observable<ICard[]> = this.cardList.asObservable();
+
+  private operationList: BehaviorSubject<Operation[]> = new BehaviorSubject<Operation[]>([]);
+  public $operationList: Observable<Operation[]> = this.operationList.asObservable();
 
   public get colors() {
     return this.colorsArray;
@@ -149,6 +185,6 @@ export class LogService {
       value: value,
       categoryName: category.name
     })
-    this.userFBService.updateCardAmount(card, card.amount - value);
+    this.userFBService.updateCardAmount(card, card.amount + value);
   }
 }

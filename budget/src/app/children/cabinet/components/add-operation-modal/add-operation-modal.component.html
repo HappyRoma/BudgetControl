@@ -21,8 +21,8 @@
 
   </div>
   <form class="operationForm" [formGroup]="operationForm">
-    <input type="date" class="formControl" formControlName="dateValue">
-    <input type="number" class="formControl" formControlName="amountValue">
+    <input type="date" class="formControl" formControlName="dateValue" min="2000-01-01">
+    <input type="number" class="formControl" formControlName="amountValue" min="0">
     <button (click)="onSubmit()"> Я не хочу верстать эту кнопку... </button>
   </form>
 </div>

@@ -6,15 +6,14 @@
       </div>
       <div class="userName">
         {{name}}
-        <colored-currency [value]="10000"></colored-currency>
       </div>
     </div>
-    <div class="monthChart">
-      <tui-ring-chart [value]="value" [content]="content" size="l">
+    <div class="monthChart" *tuiLet="value$ | async as OlegCyka">
+      <tui-ring-chart *ngIf="OlegCyka" [value]="OlegCyka" [content]="content" size="l">
       </tui-ring-chart>
       <ng-template #content let-index>
         <div>{{getValue(index) | customCurrency}}</div>
-        <div>Март 2022</div>
+        <div>{{currentMonth}}</div>
       </ng-template>
     </div>
     <div class="historyChart">

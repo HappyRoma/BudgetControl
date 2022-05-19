@@ -85,7 +85,12 @@ export class AddOperationModalComponent implements OnInit {
 
       return;
     }
-    this.service.addOperation(this.currentCategory.getValue(), this.currentCard, this.operationForm.value.dateValue, this.operationForm.value.amountValue);
+    if (this.currentCategory.getValue().type === 'expend') {
+      this.service.addOperation(this.currentCategory.getValue(), this.currentCard, this.operationForm.value.dateValue, this.operationForm.value.amountValue * -1);
+    }
+    else {
+      this.service.addOperation(this.currentCategory.getValue(), this.currentCard, this.operationForm.value.dateValue, this.operationForm.value.amountValue);
+    }
     this.modalService.close('createOperation');
     this.notify.showNotification('Операция','Операция успешна добавлена', 'success');
   }

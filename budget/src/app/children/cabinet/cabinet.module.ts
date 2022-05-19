@@ -19,6 +19,7 @@ import {CustomCurrencyPipe} from "./pipes/custom-currency.pipe";
 import {CardsComponent} from './components/cards/cards.component';
 import { AddModalComponent } from './components/add-modal/add-modal.component';
 import { AddOperationModalComponent } from './components/add-operation-modal/add-operation-modal.component';
+import {TuiLetModule} from "@taiga-ui/cdk";
 
 const routes: Routes = [
   {
@@ -77,7 +78,8 @@ const routes: Routes = [
     TuiAxesModule,
     TuiBarChartModule,
     TuiRootModule,
-    DragDropModule
+    DragDropModule,
+    TuiLetModule
   ],
   providers: [LogService]
 })

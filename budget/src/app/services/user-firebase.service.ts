@@ -126,10 +126,8 @@ export class UserFirebaseService {
           map((user) => {
             user.operationList = operation;
           })
-        ).subscribe()
-        this._user.getValue().operationList.forEach(op => {
-
-        })
+        ).subscribe();
+        this._user.next(this._user.getValue())
       }
     })
   }
@@ -205,6 +203,9 @@ export class UserFirebaseService {
    * @param category - Объект Category.
    * */
   public removeCategory(category: ICategory): void {
+    this.operationListPath?.get().forEach(operations => {
+      this.operationListPath?.doc(operations.docs.find(oper => oper.data().categoryName === category.name)?.id).update({categoryName: 'Другое'});
+    })
     this.categoryListPath?.get().forEach(categories => {
       this.categoryListPath?.doc(categories.docs.find(doc => doc.data().name === category.name)?.id).delete();
     })

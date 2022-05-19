@@ -28,7 +28,12 @@
       </li>
     </ul>
   </div>
-  <div class="category-chart">
+  <div class="category-chart" *tuiLet="categoryValues$ | async as categoryValue" (click)="switchCatType()">
+    <tui-ring-chart *ngIf="categoryValue" [value]="categoryValue" [content]="content" size="xl"></tui-ring-chart>
+    <ng-template #content let-index>
+      <div>{{getCategoryName(index)}}</div>
+      <div>{{getCategoryValue(index) | customCurrency}}</div>
+    </ng-template>
   </div>
 </div>
 <div class="category-workspace" *ngIf="categoriesType === 'expend'">
@@ -57,12 +62,14 @@
       </li>
     </ul>
   </div>
-  <div class="category-chart">
+  <div class="category-chart" *tuiLet="categoryValues$ | async as categoryValue" (click)="switchCatType()">
+    <tui-ring-chart *ngIf="categoryValue" [value]="categoryValue" [content]="content" size="xl"></tui-ring-chart>
+    <ng-template #content let-index>
+      <div>{{getCategoryName(index)}}</div>
+      <div>{{getCategoryValue(index) | customCurrency}}</div>
+    </ng-template>
   </div>
 </div>
-
-<button (click)="switchCatType()"> Сменить категории </button>
-{{categoriesType}}
 
 <div class="delete-bin"
      (click)="showBinInfo()"

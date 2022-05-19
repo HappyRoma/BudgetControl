@@ -10,6 +10,45 @@ export class Day {
     return `${this.year}-${this.month}-${this.day}`
   }
 
+  /**
+   *
+   * @param param - day | month | year
+   * @param fullDate - Полная дана YYYY-MM-DD
+   * @return current param
+   */
+  public getDate(fullDate: string, param: 'day' | 'month' | 'year'): string {
+    let parseDate = fullDate.split('-');
+    if (param === 'day') {
+      return parseDate[2];
+    }
+    if (param === 'month') {
+      return parseDate[1];
+    }
+    if (param === 'year') {
+      return parseDate[0];
+    }
+
+    return '';
+  }
+
+  /**
+   *
+   * @param param - day | month | year
+   * @return current param
+   */
+  public getTodayDate(param: string): string {
+    switch (param) {
+      case 'day':
+        return this.day;
+      case 'month':
+        return this.month;
+      case 'year':
+        return this.year;
+      default:
+        return '';
+    }
+  }
+
   public getDay(date: string) {
     let parseDate = date.split('-');
     if (parseDate[0] === this.year && parseDate[1] === this.month) {
