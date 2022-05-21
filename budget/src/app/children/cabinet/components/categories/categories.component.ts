@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ModalService} from "../../services/modal/modal.service";
 import {AppComponent} from "../../../../app.component";
 import {LogService} from "../../services/log/log.service";
@@ -13,7 +13,7 @@ import {map, Observable} from "rxjs";
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./styles/categories.component.css']
+  styleUrls: ['./styles/categories.component.css', './styles/categories.component.less']
 })
 export class CategoriesComponent implements OnInit {
 
@@ -21,7 +21,10 @@ export class CategoriesComponent implements OnInit {
   public categoriesType: CategoryType = 'expend'
   @ViewChild(AddOperationModalComponent) child!: AddOperationModalComponent;
 
-  constructor(private modalService: ModalService, private notify: AppComponent, private service: LogService) {
+  constructor(private modalService: ModalService,
+              private notify: AppComponent,
+              private service: LogService,
+              private elRef: ElementRef) {
   }
 
   public get categoryValues$(): Observable<readonly number[]> {
@@ -30,6 +33,7 @@ export class CategoriesComponent implements OnInit {
         this.categoryList = catList;
         this.separateCategoryList();
         this.setCategoryValues();
+        this.setChartColors();
 
         this.service.differentCategory$.subscribe(
           (difCat) => {
@@ -41,6 +45,7 @@ export class CategoriesComponent implements OnInit {
                 sum += operation.value;
               }
             })
+            this.valueSumExpend += sum;
             this.categoryValueExpend.push(Math.abs(sum));
           }
         )
@@ -53,7 +58,6 @@ export class CategoriesComponent implements OnInit {
         }
       })
     )
-
   }
 
   ngOnInit(): void {
@@ -84,8 +88,6 @@ export class CategoriesComponent implements OnInit {
         this.categoryNamesIncome.push(category.name);
       }
     })
-   // this.categoryNamesExpend.push(this.service.differentCategory.getValue().name);
-    console.log(this.categoryNamesExpend);
   }
 
   setCategoryValues() {
@@ -116,8 +118,19 @@ export class CategoriesComponent implements OnInit {
       this.valueSumIncome += sum;
       this.categoryValueIncome.push(Math.abs(sum));
     })
+  }
 
-   // this.categoryValueExpend.push(Math.abs(this.service.differentCategory.getValue().operationList[0].value));
+  setChartColors() {
+    if (this.categoriesType === 'expend') {
+      this.categoryListExpend.forEach((category, index) => {
+        this.elRef.nativeElement.style.setProperty(`--chart-${index}`, category.color);
+      })
+    }
+    else {
+      this.categoryListIncome.forEach((category, index) => {
+        this.elRef.nativeElement.style.setProperty(`--chart-${index}`, category.color);
+      })
+    }
   }
 
   getCategoryName(index: number): string {
@@ -138,6 +151,7 @@ export class CategoriesComponent implements OnInit {
 
   switchCatType() {
     this.categoriesType = this.categoriesType === 'expend' ? 'income' : 'expend';
+    this.setChartColors();
   }
 
   openModal(id: string) {

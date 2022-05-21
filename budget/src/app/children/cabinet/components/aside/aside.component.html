@@ -4,6 +4,7 @@
       <div class="userAvatar">
 
       </div>
+      <div class="welcum-text"> Добро пожаловать, </div>
       <div class="userName">
         {{name}}
       </div>
@@ -16,10 +17,36 @@
         <div>{{currentMonth}}</div>
       </ng-template>
     </div>
-    <div class="historyChart">
-      <tui-axes class="axes" [axisXLabels]="labelsX" [axisYLabels]="labelsY">
-        <tui-bar-chart [max]="50000" [value]="axeValue"></tui-bar-chart>
-      </tui-axes>
+    <div class="history-list">
+      <div class="history-list-content">
+        <div class="history-list-name"> Последние операции </div>
+        <div class="history-list-operations">
+          <ul *ngFor="let opLists of dividedOperationLists">
+            <div class="operation-day">
+              {{getOperationDate(opLists[0]) | uppercase}}
+            </div>
+            <li *ngFor="let operation of opLists">
+              <div class="operation-container">
+                <div class="category-icon">
+                  <div [ngStyle]="{'-webkit-mask-image': getCategoryByName(operation.categoryName)?.icon,
+                   '-webkit-mask-size': 'cover',
+                    'background-color': getCategoryByName(operation.categoryName)?.color}"
+                  ></div>
+                </div>
+                <div class="operation-info">
+                  <div class="category-name">
+                    {{operation.categoryName}}
+                  </div>
+                  <div class="card-name">
+                    {{operation.card}}
+                  </div>
+                </div>
+                <colored-currency [value]="operation.value"></colored-currency>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </tui-island>

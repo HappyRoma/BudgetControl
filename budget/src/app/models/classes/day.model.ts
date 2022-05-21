@@ -60,7 +60,7 @@ export class Day {
       }
       if (parseInt(this.day) - parseInt(parseDate[2]) < 5) {
         let currentDay = new Date().getDay();
-        let dayDiff = parseInt(this.day) - parseInt(parseDate[2]) - 1;
+        let dayDiff = parseInt(this.day) - parseInt(parseDate[2]);
         if (currentDay - dayDiff < 0) {
           return DaysOfTheWeek[6 - currentDay - dayDiff];
         }

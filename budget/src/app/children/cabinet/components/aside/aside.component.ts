@@ -1,8 +1,10 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit} from '@angular/core';
 import {LogService} from "../../services/log/log.service";
 import {Day} from "../../../../models/classes/day.model";
 import {Months} from "../../enums/months";
 import {filter, map, Observable} from "rxjs";
+import {Operation} from "../../../../models/classes/operation.model";
+import {Category} from "../../../../models/classes/category.model";
 
 @Component({
   selector: 'app-aside',
@@ -16,9 +18,14 @@ export class AsideComponent implements OnInit {
   private income: number = 0;
   private expend: number = 0;
   public value!: number[];
+  private operations: Operation[] = [];
+  private categoryList: Category[] = [];
+  public dividedOperationLists: Array<Array<Operation>> = [];
 
   constructor(private logService: LogService) {
     this.logService.$username.subscribe(name => this.name = name);
+    this.logService.$operationList.subscribe(operationList => this.getLastOperations(operationList));
+    this.logService.$categoryList.subscribe(categoryList => this.categoryList = categoryList);
   }
 
   public get value$(): Observable<readonly number[]> {
@@ -47,20 +54,56 @@ export class AsideComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
+  getLastOperations(operationList: Operation[]): void {
+    this.operations = operationList.sort(this.compareFunction).slice(0, 5);
+    this.dividedOperationLists = [];
+    let divideOpList: Operation[] = [];
+
+    this.operations.forEach((operation, index) => {
+      if (index === 0) {
+        divideOpList.push(operation);
+        return;
+      }
+      if (divideOpList[0].date === operation.date) {
+        divideOpList.push(operation);
+      }
+      else {
+        this.dividedOperationLists.push(divideOpList);
+        divideOpList = [];
+        divideOpList.push(operation);
+      }
+    })
+    this.dividedOperationLists.push(divideOpList);
+  }
+
+  getCategoryByName(categoryName: string | null): Category {
+    // @ts-ignore
+    return this.categoryList.find(category => category.name === categoryName);
+  }
+
+  getOperationDate(operation: Operation): string {
+    if (operation) {
+      return new Day().getDay(operation.date);
+    }
+
+    return '';
+  }
+
+  compareFunction(a: Operation, b: Operation): number {
+    if (a.date > b.date) {
+      return -1
+    }
+    if (a.date < b.date) {
+      return 1
+    }
+    return 0
+  }
 
   public difference: number = 0;
 
   getValue(index: number): number {
     return Number.isNaN(index) ? this.difference : this.value[index];
   }
-
-  readonly labelsX: string[] = ['ДЕК','ЯНВ','ФЕВ','МАР'];
-  readonly labelsY: string[] = ['0', '20000', '30000', '40000', '50000'];
-  readonly axeValue: [number[], number[]] = [
-    [25000, 32000, 35000, 32000],
-    [38000, 41000, 47000, 45000]
-  ];
 }
