@@ -4,7 +4,11 @@
 
 <div class="setting">
   <div class="avatar">
-    тут когда-то будет аватар(хотя я не ебу зачем он вообще нужен)
+    <div class="userAvatar" *ngIf="$user | async as user">
+      <img width="100px" height="100px" [src]="user.photoURL ?? 'assets/icons/form-icons/defaultAvatar.png'">
+    </div>
+    <p (click)="inputFile.click()"> Редактировать </p>
+    <input #inputFile type="file" hidden (change)="uploadImage($event)">
   </div>
   <tui-root>
     <form [formGroup]="settingForm">

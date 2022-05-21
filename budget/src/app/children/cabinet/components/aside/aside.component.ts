@@ -5,6 +5,7 @@ import {Months} from "../../enums/months";
 import {filter, map, Observable} from "rxjs";
 import {Operation} from "../../../../models/classes/operation.model";
 import {Category} from "../../../../models/classes/category.model";
+import {authState, getAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-aside',
@@ -55,6 +56,8 @@ export class AsideComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  public $user = authState(getAuth());
 
   getLastOperations(operationList: Operation[]): void {
     this.operations = operationList.sort(this.compareFunction).slice(0, 5);

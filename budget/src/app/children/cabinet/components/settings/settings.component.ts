@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LogService} from "../../services/log/log.service";
 import {CustomValidators} from "../../../../validators/validators";
 import {AppComponent} from "../../../../app.component";
+import {ImageUploadService} from "../../services/image-upload/image-upload.service";
+import {authState, getAuth} from "@angular/fire/auth";
 
 @Component({
   selector: 'app-settings',
@@ -12,8 +14,10 @@ import {AppComponent} from "../../../../app.component";
 
 export class SettingsComponent implements OnInit {
 
-  constructor(private logService: LogService, private notify: AppComponent) {
+  constructor(private logService: LogService, private notify: AppComponent, private imgUploadService: ImageUploadService) {
   }
+
+  $user = authState(getAuth());
 
   ngOnInit(): void {
   }
@@ -26,6 +30,10 @@ export class SettingsComponent implements OnInit {
     emailValue: new FormControl(this.logService.userEmail, [Validators.required, CustomValidators.emailValidator]),
     moneyValue: new FormControl(this.logService.currentMoneyType.getValue(), Validators.required)
   })
+
+  uploadImage(event: any) {
+    this.imgUploadService.uploadImage(event.target.files[0]);
+  }
 
   getError(control: string, error: string): boolean {
     return this.settingForm.get(control)?.getError(error);

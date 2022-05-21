@@ -3,7 +3,7 @@ import {AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument} 
 import {Category} from "../models/classes/category.model";
 import {Operation} from "../models/classes/operation.model";
 import {Card} from "../models/classes/card.model";
-import {getAuth, onAuthStateChanged, updateEmail} from "@angular/fire/auth";
+import {authState, getAuth, onAuthStateChanged, updateEmail, updateProfile} from "@angular/fire/auth";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {IUser} from "../models/interfaces/user.interface";
 import {MoneyType} from "../models/classes/moneyType.class";
@@ -160,6 +160,14 @@ export class UserFirebaseService {
 
   public get moneyTypeList() {
     return this.moneyTypesList;
+  }
+
+  public updateProfileAvatar(profilePhoto: string) {
+    const user = getAuth().currentUser;
+
+    if (user) {
+      updateProfile(user, {photoURL: profilePhoto})
+    }
   }
 
   /** Установить новое значение userName */

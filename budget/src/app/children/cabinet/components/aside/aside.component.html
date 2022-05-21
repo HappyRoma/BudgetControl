@@ -1,8 +1,8 @@
 <tui-island>
   <div class="asideContent">
     <div class="userInfo">
-      <div class="userAvatar">
-
+      <div class="userAvatar" *ngIf="$user | async as user">
+        <img width="120px" height="120px" [src]="user.photoURL ?? 'assets/icons/form-icons/defaultAvatar.png'">
       </div>
       <div class="welcum-text"> Добро пожаловать, </div>
       <div class="userName">

@@ -20,6 +20,8 @@ import {CardsComponent} from './components/cards/cards.component';
 import { AddModalComponent } from './components/add-modal/add-modal.component';
 import { AddOperationModalComponent } from './components/add-operation-modal/add-operation-modal.component';
 import {TuiLetModule} from "@taiga-ui/cdk";
+import {ImageUploadService} from "./services/image-upload/image-upload.service";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 const routes: Routes = [
   {
@@ -79,8 +81,9 @@ const routes: Routes = [
     TuiBarChartModule,
     TuiRootModule,
     DragDropModule,
-    TuiLetModule
+    TuiLetModule,
+    AngularFireStorageModule
   ],
-  providers: [LogService]
+  providers: [LogService, ImageUploadService]
 })
 export class CabinetModule { }
