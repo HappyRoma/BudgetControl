@@ -1,0 +1,14 @@
+.category-icon {
+  background-color: #f4f4f5;
+  border-radius: 10px;
+  padding-top: 5px;
+  width: 40px;
+  height: 40px;
+}
+
+.category-icon div {
+  width: 30px;
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}

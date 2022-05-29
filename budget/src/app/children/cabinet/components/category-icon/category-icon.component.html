@@ -1,0 +1,12 @@
+<div class="category-icon" [ngStyle]="{'width': getSizeWithPx(size),
+                                       'height': getSizeWithPx(size),
+                                       'padding-top': getSizeWithPx(size * 0.1 + 1),
+                                       'border-radius': getSizeWithPx(size * 0.3)}"
+>
+  <div [ngStyle]="{'-webkit-mask-image': currentCategory?.icon,
+                   '-webkit-mask-size': 'cover',
+                    'background-color': currentCategory?.color,
+                    'width': getSizeWithPx(size * 0.7),
+                    'height': getSizeWithPx(size * 0.7)}"
+  ></div>
+</div>
