@@ -58,3 +58,18 @@
   font-weight: 500;
   opacity: 80%;
 }
+
+.current-window-marker {
+  position: fixed;
+
+  top: 470px;
+  left: 2.5%;
+
+  height: 30px;
+  width: 2px;
+  border-radius: 2px;
+
+  transition: 0.5s;
+
+  background-color: black;
+}
