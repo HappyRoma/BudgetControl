@@ -183,8 +183,24 @@ export class LogService {
       card: card.name,
       date: date,
       value: value,
-      categoryName: category.name
+      categoryName: category.name,
+      id: ''
     })
     this.userFBService.updateCardAmount(card, card.amount + value);
+  }
+
+  public updateOperation(category: ICategory, card: ICard, date: string, value: number, oldOperation: Operation) {
+    this.userFBService.updateOperation({
+      categoryName: category.name,
+      card: card.name,
+      date: date,
+      value: value,
+      id: oldOperation.id
+    })
+    this.userFBService.updateCardAmount(card, card.amount - oldOperation.value + value);
+  }
+
+  public deleteOperation(operation: Operation): void {
+    this.userFBService.deleteOperation(operation);
   }
 }

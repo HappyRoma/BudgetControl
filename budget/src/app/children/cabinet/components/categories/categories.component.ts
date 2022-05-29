@@ -4,7 +4,7 @@ import {AppComponent} from "../../../../app.component";
 import {LogService} from "../../services/log/log.service";
 import {CategoryType, ICategory} from "../../../../models/interfaces/category.interface";
 import {CdkDragDrop} from "@angular/cdk/drag-drop";
-import {FormParams} from "../../../../models/interfaces/form-params";
+import {CategoryFormParams, OperationFormParams} from "../../../../models/interfaces/form-params";
 import {Category} from "../../../../models/classes/category.model";
 import {AddOperationModalComponent} from "../add-operation-modal/add-operation-modal.component";
 import {Day} from "../../../../models/classes/day.model";
@@ -33,7 +33,6 @@ export class CategoriesComponent implements OnInit {
         this.categoryList = catList;
         this.separateCategoryList();
         this.setCategoryValues();
-        this.setChartColors();
 
         this.service.differentCategory$.subscribe(
           (difCat) => {
@@ -49,6 +48,7 @@ export class CategoriesComponent implements OnInit {
             this.categoryValueExpend.push(Math.abs(sum));
           }
         )
+        this.setChartColors();
 
         if (this.categoriesType === 'expend') {
           return this.categoryValueExpend;
@@ -125,6 +125,7 @@ export class CategoriesComponent implements OnInit {
       this.categoryListExpend.forEach((category, index) => {
         this.elRef.nativeElement.style.setProperty(`--chart-${index}`, category.color);
       })
+      this.elRef.nativeElement.style.setProperty(`--chart-${this.categoryListExpend.length}`, '#939292');
     }
     else {
       this.categoryListIncome.forEach((category, index) => {
@@ -162,7 +163,7 @@ export class CategoriesComponent implements OnInit {
     this.child.setCurrentCategory(category);
   }
 
-  onSubmit(event: FormParams) {
+  onSubmit(event: CategoryFormParams) {
     try {
       this.service.addNewCategory(event.name, event.colorIndex, event.iconIndex, this.categoriesType);
       this.notify.showNotification('Категория', 'Категория успешно создана', 'success');
@@ -171,6 +172,11 @@ export class CategoriesComponent implements OnInit {
     catch (error) {
       this.notify.showNotification('Категория', 'Категория с таким именем уже существует', 'error');
     }
+  }
+
+  onSubmitOperation(event: OperationFormParams) {
+    this.service.addOperation(event.category, event.card, event.date, event.value);
+    this.modalService.close('createOperation');
   }
 
   showBinInfo() {

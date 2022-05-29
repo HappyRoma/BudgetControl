@@ -22,6 +22,9 @@ import { AddOperationModalComponent } from './components/add-operation-modal/add
 import {TuiLetModule} from "@taiga-ui/cdk";
 import {ImageUploadService} from "./services/image-upload/image-upload.service";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { OperationsComponent } from './components/operations/operations.component';
+import { CategoryIconComponent } from './components/category-icon/category-icon.component';
+import {OperationStatisticService} from "./services/operation-statistic/operation-statistic.service";
 
 const routes: Routes = [
   {
@@ -45,6 +48,10 @@ const routes: Routes = [
         component: CardsComponent
       },
       {
+        path: 'operations',
+        component: OperationsComponent
+      },
+      {
         path: '**',
         redirectTo: 'home'
       }
@@ -66,6 +73,8 @@ const routes: Routes = [
     CardsComponent,
     AddModalComponent,
     AddOperationModalComponent,
+    OperationsComponent,
+    CategoryIconComponent,
   ],
   imports: [
     CommonModule,
@@ -84,6 +93,6 @@ const routes: Routes = [
     TuiLetModule,
     AngularFireStorageModule
   ],
-  providers: [LogService, ImageUploadService]
+  providers: [LogService, ImageUploadService, OperationStatisticService]
 })
 export class CabinetModule { }

@@ -81,11 +81,6 @@ export class AsideComponent implements OnInit {
     this.dividedOperationLists.push(divideOpList);
   }
 
-  getCategoryByName(categoryName: string | null): Category {
-    // @ts-ignore
-    return this.categoryList.find(category => category.name === categoryName);
-  }
-
   getOperationDate(operation: Operation): string {
     if (operation) {
       return new Day().getDay(operation.date);

@@ -23,7 +23,13 @@
   <form class="operationForm" [formGroup]="operationForm">
     <input type="date" class="formControl" formControlName="dateValue" min="2000-01-01">
     <input type="number" class="formControl" formControlName="amountValue" min="0">
-    <button (click)="onSubmit()"> Я не хочу верстать эту кнопку... </button>
+    <div class="submit-button" (click)="onSubmit()">
+      <ng-container *ngIf="modalType === 'create'"> Добавить операцию </ng-container>
+      <ng-container *ngIf="modalType === 'update'"> Изменить операцию </ng-container>
+    </div>
+    <div class="delete-button" *ngIf="modalType === 'update'" (click)="onDelete()">
+      <ng-container> Удалить операцию </ng-container>
+    </div>
   </form>
 </div>
 

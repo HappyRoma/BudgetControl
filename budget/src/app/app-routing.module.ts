@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./children/account/account.module').then(module => module.AccountModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'cabinet'
   }
 ];
 

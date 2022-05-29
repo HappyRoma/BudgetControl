@@ -12,9 +12,11 @@
       <li *ngFor="let cat of categoryListIncome; let i = index" [attr.data-index] = "i" cdkDrag>
         <div class="category" (mousedown)="isCategoryMoving(true)" (mouseup)="isCategoryMoving(false)">
           <p> {{cat.name}} </p>
-          <div class="category-container" (click)="openModal('createOperation'); setCurrentCategory(cat)">
-            <div [ngStyle]="{'-webkit-mask-image': cat.icon, '-webkit-mask-size': 'cover', 'background-color': cat.color}"></div>
-          </div>
+          <category-icon
+            [size]="100"
+            [category]="cat"
+            (click)="openModal('createOperation'); setCurrentCategory(cat)"
+            ></category-icon>
         </div>
       </li>
       <li>
@@ -46,9 +48,11 @@
       <li *ngFor="let cat of categoryListExpend; let i = index" [attr.data-index] = "i" cdkDrag>
         <div class="category" (mousedown)="isCategoryMoving(true)" (mouseup)="isCategoryMoving(false)">
           <p> {{cat.name}} </p>
-          <div class="category-container" (click)="openModal('createOperation'); setCurrentCategory(cat)">
-            <div [ngStyle]="{'-webkit-mask-image': cat.icon, '-webkit-mask-size': 'cover', 'background-color': cat.color}"></div>
-          </div>
+          <category-icon
+            [size]="100"
+            [category]="cat"
+            (click)="openModal('createOperation'); setCurrentCategory(cat)"
+          ></category-icon>
         </div>
       </li>
       <li>
@@ -84,5 +88,5 @@
 </modal-window>
 
 <modal-window id="createOperation">
-  <add-operation></add-operation>
+  <add-operation-modal modalType="create" (submitForm)="onSubmitOperation($event)"></add-operation-modal>
 </modal-window>

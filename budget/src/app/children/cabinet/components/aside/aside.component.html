@@ -27,12 +27,7 @@
             </div>
             <li *ngFor="let operation of opLists">
               <div class="operation-container">
-                <div class="category-icon">
-                  <div [ngStyle]="{'-webkit-mask-image': getCategoryByName(operation.categoryName)?.icon,
-                   '-webkit-mask-size': 'cover',
-                    'background-color': getCategoryByName(operation.categoryName)?.color}"
-                  ></div>
-                </div>
+                <category-icon [size]="40" [category]="operation.categoryName"></category-icon>
                 <div class="operation-info">
                   <div class="category-name">
                     {{operation.categoryName}}

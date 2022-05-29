@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LogService} from "../../services/log/log.service";
 import {AppComponent} from "../../../../app.component";
-import {FormParams} from "../../../../models/interfaces/form-params";
+import {CategoryFormParams} from "../../../../models/interfaces/form-params";
 
 
 @Component({
@@ -15,7 +15,7 @@ export class AddModalComponent implements OnInit {
 
 
   @Input() type!: 'card' | 'category';
-  @Output() submitForm = new EventEmitter<FormParams>();
+  @Output() submitForm = new EventEmitter<CategoryFormParams>();
 
   public formName: string = '';
   public iconIndex: number = 0;

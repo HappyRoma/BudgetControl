@@ -162,6 +162,10 @@ export class UserFirebaseService {
     return this.moneyTypesList;
   }
 
+  /** Установить аватар у юзера
+   *
+   * @param profilePhoto - avatar URL
+   * */
   public updateProfileAvatar(profilePhoto: string) {
     const user = getAuth().currentUser;
 
@@ -243,6 +247,29 @@ export class UserFirebaseService {
    * @param operation - Объект Operation.
    * */
   public addOperation(operation: IOperation): void {
-    this.operationListPath?.doc().set(operation);
+    let newOperationDoc: AngularFirestoreDocument<Operation> | undefined = this.operationListPath?.doc();
+    newOperationDoc?.set(operation);
+    newOperationDoc?.update({id: newOperationDoc?.ref.id})
+  }
+
+  /** Изменение операции
+   *
+   * @param operation - Измененный Объект Operation. ID операции не должен изменяться!
+   * */
+  public updateOperation(operation: IOperation): void {
+    this.operationListPath?.doc(operation.id).update({
+      value: operation.value,
+      date: operation.date,
+      categoryName: operation.categoryName,
+      card: operation.card
+    })
+  }
+
+  /** Удаление операции
+   *
+   * @param operation - Объект Operation.
+   * */
+  public deleteOperation(operation: IOperation): void {
+    this.operationListPath?.doc(operation.id).delete();
   }
 }

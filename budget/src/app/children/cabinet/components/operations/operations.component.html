@@ -1,0 +1,39 @@
+<div class="pageName">
+  Операции
+</div>
+<div class="operation-list">
+  <table>
+    <tr>
+      <th> Категория </th>
+      <th> Дата </th>
+      <th> Сумма </th>
+      <th> Счёт </th>
+      <th class="question-col" (click)="onQuestionClick()">
+        <img src="assets/icons/form-icons/question-circle.svg">
+      </th>
+    </tr>
+    <tr *ngFor="let operation of operationList" (dblclick)="openOperationUpdate('update-operation', operation)">
+      <td>
+        <div class="category-operation">
+          <category-icon [size]="40" [category]="operation.categoryName"></category-icon>
+          <div class="category-name">
+            {{operation.categoryName}}
+          </div>
+        </div>
+      </td>
+      <td>
+        {{getOperationDate(operation)}}
+      </td>
+      <td>
+        <colored-currency [value]="operation.value"></colored-currency>
+      </td>
+      <td>
+        {{operation.card}}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<modal-window id="update-operation">
+  <add-operation-modal modalType="update" (submitForm)="onSubmit($event)" (deleteOperation)="onDelete($event)"></add-operation-modal>
+</modal-window>

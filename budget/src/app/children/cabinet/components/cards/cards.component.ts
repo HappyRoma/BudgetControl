@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {LogService} from "../../services/log/log.service";
 import {Card} from "../../../../models/classes/card.model";
 import {ModalService} from "../../services/modal/modal.service";
-import {FormParams} from "../../../../models/interfaces/form-params";
+import {CategoryFormParams} from "../../../../models/interfaces/form-params";
 import {AppComponent} from "../../../../app.component";
 import {BehaviorSubject} from "rxjs";
 
@@ -34,7 +34,7 @@ export class CardsComponent implements OnInit {
     this.modalService.open(id);
   }
 
-  onSubmit(event: FormParams) {
+  onSubmit(event: CategoryFormParams) {
     try {
       this.service.addNewCard(event.name, event.colorIndex, event.iconIndex);
       this.notify.showNotification('Счет', 'Счет успешно создан', 'success');

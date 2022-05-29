@@ -81,22 +81,9 @@ modal-window {
   font-size: 20px;
 }
 
-.category-container {
-  background-color: #f4f4f5;
-  border-radius: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 10px;
-  padding-top: 10%;
-  width: 100px;
-  height: 100px;
-}
-
-.category-container div {
-  width: 70px;
-  height: 70px;
-  margin-left: auto;
-  margin-right: auto;
+category-icon {
+  display: flex;
+  justify-content: center;
 }
 
 .cdk-drop-list-dragging .cdk-drag {

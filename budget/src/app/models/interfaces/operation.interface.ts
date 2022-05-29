@@ -7,4 +7,6 @@ export interface IOperation {
   value: number;
   /** Карта списания **/
   card: string;
+  /** ID операции **/
+  id: string;
 }

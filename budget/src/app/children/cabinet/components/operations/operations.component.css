@@ -1,0 +1,58 @@
+modal-window {
+  display: none;
+}
+
+.operation-list {
+  margin: 60px;
+  height: 80vh;
+
+  overflow: auto;
+}
+
+.operation-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.operation-list::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+.operation-list::-webkit-scrollbar-thumb {
+  background-color: #9fa8f5;
+  border-radius: 100px;
+}
+
+table {
+  width: 95%;
+}
+
+.question-col {
+  width: 10px;
+}
+
+tr {
+  height: 68px;
+  border-bottom: 1px solid #B3B3B3;
+}
+
+tr:first-child {
+  border-bottom: 0;
+}
+
+th {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+td {
+  font-weight: 400;
+  font-size: 16px;
+  cursor: default;
+}
+
+.category-operation {
+  display: flex;
+  column-gap: 10px;
+  align-items: center;
+}

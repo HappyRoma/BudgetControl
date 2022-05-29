@@ -5,11 +5,13 @@ export class Operation implements IOperation {
   date: string;
   value: number;
   card: string;
+  id: string;
 
-  constructor(category: string, date: string, value: number, card: string) {
+  constructor(category: string, date: string, value: number, card: string, id: string) {
     this.categoryName = category;
     this.date = date;
     this.value = value;
     this.card = card;
+    this.id = id;
   }
 }

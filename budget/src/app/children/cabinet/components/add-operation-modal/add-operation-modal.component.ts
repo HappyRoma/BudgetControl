@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ModalService} from "../../services/modal/modal.service";
 import {LogService} from "../../services/log/log.service";
 import {Category} from "../../../../models/classes/category.model";
@@ -7,14 +7,19 @@ import {Card} from "../../../../models/classes/card.model";
 import {AppComponent} from "../../../../app.component";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Day} from "../../../../models/classes/day.model";
+import {OperationFormParams} from "../../../../models/interfaces/form-params";
 
 
 @Component({
-  selector: 'add-operation',
+  selector: 'add-operation-modal',
   templateUrl: './add-operation-modal.component.html',
   styleUrls: ['./add-operation-modal.component.css']
 })
 export class AddOperationModalComponent implements OnInit {
+
+  @Input() modalType: 'update' | 'create' = 'create';
+  @Output() submitForm = new EventEmitter<OperationFormParams>();
+  @Output() deleteOperation = new EventEmitter<boolean>();
 
   public currentCategory: BehaviorSubject<Category> = new BehaviorSubject<Category>({
     name: 'Другое',
@@ -86,13 +91,26 @@ export class AddOperationModalComponent implements OnInit {
       return;
     }
     if (this.currentCategory.getValue().type === 'expend') {
-      this.service.addOperation(this.currentCategory.getValue(), this.currentCard, this.operationForm.value.dateValue, this.operationForm.value.amountValue * -1);
+      this.submitForm.emit({
+        category: this.currentCategory.getValue(),
+        card: this.currentCard,
+        date: this.operationForm.value.dateValue,
+        value: this.operationForm.value.amountValue * -1
+      })
     }
     else {
-      this.service.addOperation(this.currentCategory.getValue(), this.currentCard, this.operationForm.value.dateValue, this.operationForm.value.amountValue);
+      this.submitForm.emit({
+        category: this.currentCategory.getValue(),
+        card: this.currentCard,
+        date: this.operationForm.value.dateValue,
+        value: this.operationForm.value.amountValue
+      })
     }
-    this.modalService.close('createOperation');
     this.notify.showNotification('Операция','Операция успешна добавлена', 'success');
+  }
+
+  onDelete() {
+    this.deleteOperation.emit(true);
   }
 
   openModal(id: string) {
@@ -114,13 +132,39 @@ export class AddOperationModalComponent implements OnInit {
     }
   }
 
-  setCurrentCategory(category: Category) {
-    this.currentCategory.next(category);
+  setCurrentDate(date: string) {
+    this.operationForm.controls['dateValue'].setValue(date);
+  }
+
+  setCurrentValue(value: number) {
+    this.operationForm.controls['amountValue'].setValue(Math.abs(value))
+  }
+
+  setCurrentCategory(category: Category | string) {
+    if (typeof category === "string") {
+      this.currentCategory.next(this.serviceCategoryList.find(cat => cat.name === category) ?? this.currentCategory.getValue());
+    }
+    else {
+      this.currentCategory.next(category);
+    }
     this.modalService.close('chooseCategory');
   }
 
-  setCurrentCard(card: Card) {
-    this.currentCard = card;
+  setCurrentCard(card: Card | string) {
+    if (typeof card === "string") {
+      this.currentCard = this.cardList.find(c => c.name === card) ?? this.currentCard;
+    }
+    else {
+      this.currentCard = card;
+    }
     this.modalService.close('chooseCard');
+  }
+
+  getModalType(): string {
+    if (this.modalType === 'create') {
+      return 'Добавить операцию'
+    }
+
+    return 'Изменить операцию'
   }
 }
