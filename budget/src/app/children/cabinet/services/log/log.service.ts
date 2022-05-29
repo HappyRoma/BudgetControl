@@ -202,5 +202,9 @@ export class LogService {
 
   public deleteOperation(operation: Operation): void {
     this.userFBService.deleteOperation(operation);
+    let card = this.cardList.getValue().find(card => card.name === operation.card);
+    if (card) {
+      this.userFBService.updateCardAmount(card, operation.value);
+    }
   }
 }

@@ -176,6 +176,7 @@ export class CategoriesComponent implements OnInit {
 
   onSubmitOperation(event: OperationFormParams) {
     this.service.addOperation(event.category, event.card, event.date, event.value);
+    this.notify.showNotification('Операция','Операция успешна добавлена', 'success');
     this.modalService.close('createOperation');
   }
 

@@ -106,7 +106,6 @@ export class AddOperationModalComponent implements OnInit {
         value: this.operationForm.value.amountValue
       })
     }
-    this.notify.showNotification('Операция','Операция успешна добавлена', 'success');
   }
 
   onDelete() {
