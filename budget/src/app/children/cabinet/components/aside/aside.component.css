@@ -55,7 +55,8 @@ tui-island {
   display: inline-block;
   border-radius: 7px;
   width: 285px;
-  height: 450px;
+  height: auto;
+  max-height: 450px;
   margin-top: 40px;
   background-color: white;
 }

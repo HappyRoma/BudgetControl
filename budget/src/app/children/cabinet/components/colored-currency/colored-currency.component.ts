@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class ColoredCurrencyComponent implements OnInit {
 
-  @Input() value!: number | Observable<number>;
+  @Input() public value!: number | Observable<number>;
 
   public val: number = 0;
   public res: number = 0;

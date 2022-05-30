@@ -14,8 +14,8 @@ import { CategoryFormParams } from '../../../../models/interfaces/form-params';
 export class AddModalComponent implements OnInit, OnDestroy {
 
 
-  @Input() type!: 'card' | 'category';
-  @Output() submitForm = new EventEmitter<CategoryFormParams>();
+  @Input() public type!: 'card' | 'category';
+  @Output() public submitForm: EventEmitter<CategoryFormParams> = new EventEmitter<CategoryFormParams>();
 
   public formGroup: FormGroup = new FormGroup({
       nameValue: new FormControl('', [Validators.required, Validators.maxLength(15)])

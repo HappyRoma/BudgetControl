@@ -18,9 +18,9 @@ import { ICard } from '../../../../models/interfaces/card.interface';
 })
 export class AddOperationModalComponent implements OnInit {
 
-  @Input() modalType: 'update' | 'create' = 'create';
-  @Output() submitForm = new EventEmitter<OperationFormParams>();
-  @Output() deleteOperation = new EventEmitter<boolean>();
+  @Input() public modalType: 'update' | 'create' = 'create';
+  @Output() public submitForm: EventEmitter<OperationFormParams> = new EventEmitter<OperationFormParams>();
+  @Output() public deleteOperation: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public currentCategory: BehaviorSubject<Category> = new BehaviorSubject<Category>({
       name: 'Другое',

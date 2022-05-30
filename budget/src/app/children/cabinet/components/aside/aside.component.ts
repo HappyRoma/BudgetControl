@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LogService } from '../../services/log/log.service';
 import { Day } from '../../../../models/classes/day.model';
 import { Months } from '../../enums/months';
@@ -12,7 +12,7 @@ import { authState, getAuth, User } from '@angular/fire/auth';
     templateUrl: './aside.component.html',
     styleUrls: ['./aside.component.css', 'aside.component.less']
 })
-export class AsideComponent implements OnInit {
+export class AsideComponent  {
 
     public name: string = '';
     public currentMonth: string = `${Months[parseInt(new Day().getTodayDate('month'))]} ${new Day().getTodayDate('year')}`;
@@ -57,9 +57,6 @@ export class AsideComponent implements OnInit {
                 return this.value;
             })
         );
-    }
-
-    public ngOnInit(): void {
     }
 
     public getOperationDate(operation: Operation): string {
