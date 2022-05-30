@@ -1,6 +1,6 @@
 export interface IOperation {
   /** Категория операции **/
-  categoryName: string | null;
+  categoryName: string;
   /** Дата операции **/
   date: string;
   /** Сумма операции **/

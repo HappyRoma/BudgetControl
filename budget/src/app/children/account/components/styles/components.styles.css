@@ -40,3 +40,19 @@ input {
   background: url(../../../../../icons/form-icons/icon-eye-on.svg) no-repeat;
   background-size: cover;
 }
+
+.accept-button {
+  width:100px;
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  background-color: #a7affe;
+  border: 0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.reg {
+  width: 200px;
+  font-size: 18px;
+}

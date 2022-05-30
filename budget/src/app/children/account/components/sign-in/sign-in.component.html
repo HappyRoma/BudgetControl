@@ -7,11 +7,10 @@
       <input type="text" class="formControl" placeholder="Логин" formControlName="login">
       <input type="{{passwordType}}" class="formControl" placeholder="Пароль" formControlName="password">
       <div class="show-hide" (mouseleave)="showPassword(false)" (mouseup)="showPassword(false)" (mousedown)="showPassword(true)" [ngClass]="{inactive: isHiddenPassword}"></div>
-      <button type="button" (click)="onSubmit()"> Войти </button>
-      <button type="button" (click)="onSignOut()"> Выйти </button>
-      <button type="button" routerLink="/cabinet"> Кабинет </button>
+      <button class="accept-button" type="button" (click)="onSubmit()"> Войти </button>
     </form>
   </div>
+  <span> Нет аккаунта? </span>
   <span class="link" routerLink="/login/registration">
     Регистрация
   </span>

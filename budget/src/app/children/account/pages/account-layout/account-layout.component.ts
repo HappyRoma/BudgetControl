@@ -1,15 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-account-layout',
-  templateUrl: './account-layout.component.html',
-  styleUrls: ['./account-layout.component.css']
+    selector: 'app-account-layout',
+    templateUrl: './account-layout.component.html',
+    styleUrls: ['./account-layout.component.css']
 })
-export class AccountLayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class AccountLayoutComponent {
+    constructor() { }
 }

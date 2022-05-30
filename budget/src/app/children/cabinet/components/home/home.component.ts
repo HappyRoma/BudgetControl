@@ -1,22 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {LogService} from "../../services/log/log.service";
+import { Component, OnInit } from '@angular/core';
+import { LogService } from '../../services/log/log.service';
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.css']
 })
 
 export class HomeComponent implements OnInit {
 
-  name: string = "";
+    public name: string = '';
 
-  constructor(private logService: LogService) {
-    this.logService.$username.subscribe(name => this.name = name);
-  }
+    constructor(private _logService: LogService) {
+        this._logService.$username.subscribe((name:string) => this.name = name);
+    }
 
-  ngOnInit(): void {
-  }
+    public ngOnInit(): void {
+    }
 
 }

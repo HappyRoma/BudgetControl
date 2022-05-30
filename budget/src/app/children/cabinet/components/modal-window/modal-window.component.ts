@@ -1,47 +1,48 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
-import {ModalService} from "../../services/modal/modal.service";
+import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
-  selector: 'modal-window',
-  templateUrl: './modal-window.component.html',
-  styleUrls: ['./modal-window.component.css']
+    selector: 'modal-window',
+    templateUrl: './modal-window.component.html',
+    styleUrls: ['./modal-window.component.css']
 })
-export class ModalWindowComponent implements OnInit {
+export class ModalWindowComponent implements OnInit, OnDestroy {
 
   @Input() id!: string;
-  private element: any;
+  private _element: any;
 
-  constructor(private modalService: ModalService, private el: ElementRef) {
-    this.element = this.el.nativeElement;
+  constructor(private _modalService: ModalService, private _el: ElementRef) {
+      this._element = this._el.nativeElement;
   }
 
-  ngOnInit(): void {
-    if (!this.id) {
-      console.error("Modal должен иметь id");
-      return;
-    }
+  public ngOnInit(): void {
+      if (!this.id) {
+          console.error('Modal должен иметь id');
 
-    // @ts-ignore
-    this.element.addEventListener('click', x => {
-      if (x.target.className === 'my-modal') {
-        this.close();
+          return;
       }
-    });
 
-    this.modalService.add(this);
+      // @ts-ignore
+      this._element.addEventListener('click', x => {
+          if (x.target.className === 'my-modal') {
+              this.close();
+          }
+      });
+
+      this._modalService.add(this);
   }
 
-  ngOnDestroy(): void {
-    this.modalService.remove(this.id);
-    this.element.remove;
+  public ngOnDestroy(): void {
+      this._modalService.remove(this.id);
+      this._element.remove;
   }
 
-  open(): void {
-    this.element.style.display = 'block';
+  public open(): void {
+      this._element.style.display = 'block';
   }
 
-  close(): void {
-    this.element.style.display = 'none';
+  public close(): void {
+      this._element.style.display = 'none';
   }
 
 }

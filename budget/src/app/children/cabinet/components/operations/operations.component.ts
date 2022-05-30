@@ -1,76 +1,73 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {LogService} from "../../services/log/log.service";
-import {Operation} from "../../../../models/classes/operation.model";
-import {Day} from "../../../../models/classes/day.model";
-import {AppComponent} from "../../../../app.component";
-import {ModalService} from "../../services/modal/modal.service";
-import {AddOperationModalComponent} from "../add-operation-modal/add-operation-modal.component";
-import {Category} from "../../../../models/classes/category.model";
-import {Card} from "../../../../models/classes/card.model";
-import {OperationFormParams} from "../../../../models/interfaces/form-params";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { LogService } from '../../services/log/log.service';
+import { Operation } from '../../../../models/classes/operation.model';
+import { Day } from '../../../../models/classes/day.model';
+import { AppComponent } from '../../../../app.component';
+import { ModalService } from '../../services/modal/modal.service';
+import { AddOperationModalComponent } from '../add-operation-modal/add-operation-modal.component';
+import { OperationFormParams } from '../../../../models/interfaces/form-params';
 
 @Component({
-  selector: 'app-operations',
-  templateUrl: './operations.component.html',
-  styleUrls: ['./operations.component.css']
+    selector: 'app-operations',
+    templateUrl: './operations.component.html',
+    styleUrls: ['./operations.component.css']
 })
-export class OperationsComponent implements OnInit {
+export class OperationsComponent {
 
-  public operationList: Operation[] = [];
-  private currentOperation!: Operation;
-  @ViewChild(AddOperationModalComponent) child!: AddOperationModalComponent;
+    @ViewChild (AddOperationModalComponent) child!: AddOperationModalComponent;
 
-  constructor(private logService: LogService, private notify: AppComponent, private modalService: ModalService) {
-    this.logService.$operationList.subscribe(operations => this.operationList = operations.sort(this.compareFunction))
-  }
+    public operationList: Operation[] = [];
+    private _currentOperation!: Operation;
 
-  ngOnInit(): void {
-  }
 
-  compareFunction(a: Operation, b: Operation): number {
-    if (a.date > b.date) {
-      return -1
-    }
-    if (a.date < b.date) {
-      return 1
-    }
-    return 0
-  }
-
-  getOperationDate(operation: Operation): string {
-    if (operation) {
-      return new Day().getDay(operation.date);
+    constructor(private _logService: LogService, private _notify: AppComponent, private _modalService: ModalService) {
+        this._logService.$operationList.subscribe((operations: Operation[]) => this.operationList = operations.sort(this.compareFunction));
     }
 
-    return '';
-  }
+    public getOperationDate(operation: Operation): string {
+        if (operation) {
+            return new Day().getDay(operation.date);
+        }
 
-  onQuestionClick() {
-    this.notify.showNotification('Операции', 'Для того, чтобы изменить параметры операции или удалить ее, кликните по ней 2 раза', 'info');
-  }
-
-  onSubmit(event: OperationFormParams) {
-    this.logService.updateOperation(event.category, event.card, event.date, event.value, this.currentOperation);
-    this.notify.showNotification('Операция','Операция успешна изменена', 'success');
-    this.modalService.close('update-operation');
-  }
-
-  onDelete(event: boolean) {
-    if (event) {
-      this.logService.deleteOperation(this.currentOperation);
-      this.notify.showNotification('Операция', 'Операция успешна удалена', 'success');
-      this.modalService.close('update-operation');
+        return '';
     }
-  }
 
-  openOperationUpdate(id: string, operation: Operation) {
-    this.currentOperation = operation;
-    this.child.setCurrentDate(operation.date);
-    this.child.setCurrentValue(operation.value);
-    this.child.setCurrentCard(operation.card);
-    // @ts-ignore
-    this.child.setCurrentCategory(operation.categoryName);
+    public onQuestionClick(): void {
+        this._notify.showNotification('Операции', 'Для того, чтобы изменить параметры операции или удалить ее, кликните по ней 2 раза', 'info');
+    }
 
-    this.modalService.open(id);
-  }
+    public onSubmit(event: OperationFormParams): void {
+        this._logService.updateOperation(event.category, event.card, event.date, event.value, this._currentOperation);
+        this._notify.showNotification('Операция','Операция успешна изменена', 'success');
+        this._modalService.close('update-operation');
+    }
+
+    public onDelete(event: boolean): void {
+        if (event) {
+            this._logService.deleteOperation(this._currentOperation);
+            this._notify.showNotification('Операция', 'Операция успешна удалена', 'success');
+            this._modalService.close('update-operation');
+        }
+    }
+
+    public openOperationUpdate(id: string, operation: Operation): void {
+        this._currentOperation = operation;
+        this.child.setCurrentDate(operation.date);
+        this.child.setCurrentValue(operation.value);
+        this.child.setCurrentCard(operation.card);
+        this.child.setCurrentCategory(operation.categoryName);
+
+        this._modalService.open(id);
+    }
+
+    private compareFunction(a: Operation, b: Operation): number {
+        if (a.date > b.date) {
+            return -1;
+        }
+        if (a.date < b.date) {
+            return 1;
+        }
+
+        return 0;
+    }
 }

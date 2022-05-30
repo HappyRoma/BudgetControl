@@ -1,14 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-cabinet-layout',
-  templateUrl: './cabinet-layout.component.html',
-  styleUrls: ['./cabinet-layout.component.css']
+    selector: 'app-cabinet-layout',
+    templateUrl: './cabinet-layout.component.html',
+    styleUrls: ['./cabinet-layout.component.css']
 })
-export class CabinetLayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class CabinetLayoutComponent {
+    constructor() { }
 }

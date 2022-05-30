@@ -1,44 +1,38 @@
-import {ChangeDetectionStrategy, ChangeDetectorRef, Component, DoCheck, Input, OnInit} from '@angular/core';
-import {Category} from "../../../../models/classes/category.model";
-import {LogService} from "../../services/log/log.service";
-import {Observable} from "rxjs";
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
+import { Category } from '../../../../models/classes/category.model';
+import { LogService } from '../../services/log/log.service';
 
 @Component({
-  selector: 'category-icon',
-  templateUrl: './category-icon.component.html',
-  styleUrls: ['./category-icon.component.css']
+    selector: 'category-icon',
+    templateUrl: './category-icon.component.html',
+    styleUrls: ['./category-icon.component.css']
 })
-export class CategoryIconComponent implements OnInit {
+export class CategoryIconComponent implements DoCheck {
 
-  @Input() category: Category | string | null = '';
-  @Input() size: number = 0;
+  @Input() public category: Category | string = '';
+  @Input() public size: number = 0;
 
-  private categoryList: Category[] = [];
   public currentCategory!: Category;
+  private _categoryList: Category[] = [];
 
-  constructor(private service: LogService) {
-    this.service.$categoryList.subscribe(catList => this.categoryList = catList );
+  constructor(private _service: LogService) {
+      this._service.$categoryList.subscribe((catList: Category[]) => this._categoryList = catList );
   }
 
-  ngOnInit(): void {
+  public ngDoCheck(): void {
+      if (typeof this.category === 'string') {
+          this.currentCategory = this.getCategoryByName(this.category);
+      }
+      else {
+          this.currentCategory = this.category;
+      }
   }
 
-  ngDoCheck(): void {
-    if (typeof this.category === "string") {
-      this.currentCategory = this.getCategoryByName(this.category);
-    }
-    else {
-      // @ts-ignore
-      this.currentCategory = this.category;
-    }
+  public getCategoryByName(categoryName: string): Category {
+      return this._categoryList.find((category: Category) => category.name === categoryName)!;
   }
 
-  getCategoryByName(categoryName: string | null): Category {
-    // @ts-ignore
-    return this.categoryList.find(category => category.name === categoryName);
-  }
-
-  getSizeWithPx(size: number): string {
-   return `${size.toString()}px`
+  public getSizeWithPx(size: number): string {
+      return `${size.toString()}px`;
   }
 }
