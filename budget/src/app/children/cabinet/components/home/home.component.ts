@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LogService } from '../../services/log/log.service';
 
 
@@ -8,15 +8,11 @@ import { LogService } from '../../services/log/log.service';
     styleUrls: ['./home.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent {
 
     public name: string = '';
 
     constructor(private _logService: LogService) {
         this._logService.$username.subscribe((name:string) => this.name = name);
     }
-
-    public ngOnInit(): void {
-    }
-
 }

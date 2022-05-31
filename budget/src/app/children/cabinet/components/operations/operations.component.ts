@@ -6,6 +6,7 @@ import { AppComponent } from '../../../../app.component';
 import { ModalService } from '../../services/modal/modal.service';
 import { AddOperationModalComponent } from '../add-operation-modal/add-operation-modal.component';
 import { OperationFormParams } from '../../../../models/interfaces/form-params';
+import { map, Observable } from 'rxjs';
 
 @Component({
     selector: 'app-operations',
@@ -16,12 +17,19 @@ export class OperationsComponent {
 
     @ViewChild (AddOperationModalComponent) child!: AddOperationModalComponent;
 
-    public operationList: Operation[] = [];
     private _currentOperation!: Operation;
 
 
     constructor(private _logService: LogService, private _notify: AppComponent, private _modalService: ModalService) {
-        this._logService.$operationList.subscribe((operations: Operation[]) => this.operationList = operations.sort(this.compareFunction));
+        console.log(new Date().getDay());
+    }
+
+    public get operationList$(): Observable<Operation[]> {
+        return this._logService.$operationList.pipe(
+            map((operations: Operation[]) => {
+                return operations.sort(this.compareFunction);
+            })
+        );
     }
 
     public getOperationDate(operation: Operation): string {

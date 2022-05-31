@@ -62,7 +62,7 @@ export class Day {
                 const currentDay: number = new Date().getDay();
                 const dayDiff: number = parseInt(this._day) - parseInt(parseDate[2]);
                 if (currentDay - dayDiff < 0) {
-                    return DaysOfTheWeek[6 - currentDay - dayDiff];
+                    return DaysOfTheWeek[6 - (dayDiff - currentDay) + 1];
                 }
 
                 return DaysOfTheWeek[currentDay - dayDiff];

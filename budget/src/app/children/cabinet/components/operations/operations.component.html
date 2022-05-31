@@ -1,8 +1,8 @@
 <div class="pageName">
   Операции
 </div>
-<div class="operation-list">
-  <table>
+<div class="operation-list" *ngIf="operationList$ | async as operationList">
+  <table *ngIf="operationList.length !== 0">
     <tr>
       <th> Категория </th>
       <th> Дата </th>
@@ -32,6 +32,14 @@
       </td>
     </tr>
   </table>
+  <div class="no-operations" *ngIf="operationList.length === 0">
+    <img src="assets/sad-cipa.png">
+    <div class="no-operations-text">
+      <p> К сожалению, у вас еще нет операций :(
+          <br> Чтобы добавить операцию, кликните по категории в соответствующем <span routerLink="/cabinet/categories">разделе</span>
+      </p>
+    </div>
+  </div>
 </div>
 
 <modal-window id="update-operation">

@@ -1,5 +1,5 @@
 <div class="my-modal">
-  <div class="my-modal-body">
+  <div class="my-modal-body" [@modalTrigger]="modalTriggerState">
     <div class="close-button" (click)="close()"></div>
     <ng-content></ng-content>
   </div>

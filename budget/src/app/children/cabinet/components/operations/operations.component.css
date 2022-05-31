@@ -56,3 +56,16 @@ td {
   column-gap: 10px;
   align-items: center;
 }
+
+.no-operations {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.no-operations p span {
+  color: #0025ff;
+  cursor: pointer;
+}
